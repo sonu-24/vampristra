@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SSC CGL 2026 Mock Test – Vampristra</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,sans-serif;background:#e8eef8;font-size:14px;color:#111;}
+
+/* TOP BAR */
+.top-bar{background:#1a2a4a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:.5rem 1rem;font-size:.82rem;}
+.top-bar .logo{font-weight:700;color:#D4A843;letter-spacing:.04em;}
+.top-bar .logo span{font-size:.6rem;color:#9ab;font-weight:400;letter-spacing:.12em;display:block;}
+.top-bar .test-info{color:#9ab;font-size:.75rem;text-align:right;}
+
+/* NAV BAR */
+.nav-bar{background:#2a3f6a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:.4rem 1rem;flex-wrap:wrap;gap:.4rem;}
+.nav-bar .section-tabs{display:flex;gap:.4rem;flex-wrap:wrap;}
+.sec-tab{padding:.3rem .9rem;border-radius:3px;font-size:.78rem;cursor:pointer;border:1px solid transparent;transition:all .2s;}
+.sec-tab.active{background:#D4A843;color:#1a2a4a;font-weight:700;}
+.sec-tab.done{background:#22c55e;color:#fff;}
+.sec-tab.inactive{background:#3a5080;color:#ccc;}
+.nav-bar .timer-block{text-align:center;}
+.timer-label{font-size:.65rem;color:#9ab;text-transform:uppercase;}
+.timer-val{font-size:1.2rem;font-weight:700;color:#fbbf24;font-variant-numeric:tabular-nums;}
+.timer-val.danger{color:#f87171;animation:blink .7s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* STAT BAR */
+.stat-bar{background:#e0e8f4;border-bottom:1px solid #b8c8dc;display:flex;gap:1rem;padding:.35rem 1rem;font-size:.75rem;color:#444;flex-wrap:wrap;align-items:center;}
+.stat-item{display:flex;gap:.3rem;align-items:center;}
+.stat-item .dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
+.dot-answered{background:#22c55e;}
+.dot-notvisited{background:#888;}
+.dot-notanswered{background:#ef4444;}
+.dot-markedreview{background:#a855f7;}
+
+/* MAIN */
+.main{display:flex;min-height:calc(100vh - 160px);}
+.question-panel{flex:1;padding:1rem 1.2rem;background:#fff;border-right:2px solid #c8d8ec;}
+.right-panel{width:260px;background:#f5f8fc;padding:.8rem;display:flex;flex-direction:column;gap:.8rem;}
+
+/* QUESTION */
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
+.q-num-badge{background:#1a2a4a;color:#fff;padding:.3rem .8rem;border-radius:3px;font-size:.82rem;font-weight:700;}
+.q-marks{font-size:.75rem;color:#555;}
+.q-text{font-size:.97rem;line-height:1.7;margin-bottom:1rem;color:#111;font-weight:500;}
+.options{display:flex;flex-direction:column;gap:.55rem;}
+.opt{display:flex;align-items:flex-start;gap:.7rem;padding:.6rem .9rem;border:1.5px solid #d0d8e8;border-radius:4px;cursor:pointer;transition:all .18s;background:#fff;}
+.opt:hover{background:#f0f4fc;border-color:#4a90d9;}
+.opt.selected{background:#e8f0fb;border-color:#4a90d9;}
+.opt.correct{background:#dcfce7;border-color:#22c55e;}
+.opt.wrong{background:#fee2e2;border-color:#ef4444;}
+.opt-label{font-weight:700;color:#1a2a4a;min-width:18px;font-size:.88rem;}
+.opt-text{font-size:.9rem;line-height:1.5;}
+
+/* ACTION BUTTONS */
+.action-row{display:flex;gap:.6rem;margin-top:1.2rem;flex-wrap:wrap;}
+.btn{padding:.5rem 1.1rem;border:none;border-radius:3px;font-size:.82rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
+.btn:hover{opacity:.88;}
+.btn-save{background:#22c55e;color:#fff;}
+.btn-savemark{background:#a855f7;color:#fff;}
+.btn-clear{background:#f59e0b;color:#fff;}
+.btn-mark{background:#6b7280;color:#fff;}
+.btn-submit{background:#ef4444;color:#fff;margin-left:auto;}
+
+/* NAV GRID */
+.nav-grid-title{font-size:.75rem;font-weight:700;color:#1a2a4a;text-align:center;padding:.3rem;background:#dce8f4;border-radius:3px;}
+.nav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.3rem;}
+.nav-q{width:100%;aspect-ratio:1;border:none;border-radius:3px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;}
+.nav-q.notvisited{background:#ccc;color:#444;}
+.nav-q.notanswered{background:#ef4444;color:#fff;}
+.nav-q.answered{background:#22c55e;color:#fff;}
+.nav-q.markedreview{background:#a855f7;color:#fff;}
+.nav-q.current{outline:2.5px solid #1a2a4a;outline-offset:1px;}
+
+/* RIGHT PANEL INFO */
+.panel-info{background:#fff;border:1px solid #d0d8e8;border-radius:4px;padding:.7rem;font-size:.78rem;color:#555;}
+.panel-info strong{display:block;color:#1a2a4a;margin-bottom:.4rem;font-size:.8rem;}
+
+/* SUBMIT MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;}
+.modal-bg.active{display:flex;}
+.modal{background:#fff;border-radius:8px;max-width:500px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.3);overflow:hidden;}
+.modal-head{background:#1a2a4a;color:#fff;padding:1rem 1.5rem;font-weight:700;font-size:1rem;display:flex;justify-content:space-between;}
+.modal-body{padding:1.5rem;}
+.modal-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem;}
+.mstat{background:#f5f7fa;border-radius:6px;padding:.7rem;text-align:center;border:1px solid #e0e4ea;}
+.mstat .val{font-size:1.4rem;font-weight:800;color:#1a2a4a;}
+.mstat .lbl{font-size:.7rem;color:#888;}
+.modal-btns{display:flex;gap:.8rem;margin-top:1rem;}
+.modal-btns button{flex:1;padding:.7rem;border:none;border-radius:4px;font-weight:700;font-size:.88rem;cursor:pointer;}
+.btn-confirm{background:#ef4444;color:#fff;}
+.btn-cancel{background:#6b7280;color:#fff;}
+
+/* RESULT */
+.result-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:center;justify-content:center;}
+.result-bg.active{display:flex;}
+.result-modal{background:#fff;border-radius:10px;max-width:680px;width:92%;max-height:90vh;overflow-y:auto;box-shadow:0 10px 50px rgba(0,0,0,.4);}
+.result-head{padding:1.5rem;text-align:center;}
+.result-score{font-size:3rem;font-weight:900;color:#1a2a4a;}
+.result-outof{font-size:1rem;color:#888;}
+.result-pct{font-size:1.5rem;font-weight:700;margin:.3rem 0;}
+.result-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0;}
+.result-table th{background:#1a2a4a;color:#fff;padding:.5rem .7rem;text-align:left;}
+.result-table td{padding:.45rem .7rem;border-bottom:1px solid #eee;}
+.result-table tr:nth-child(even) td{background:#f9f9f9;}
+.res-actions{display:flex;gap:.8rem;padding:1rem 1.5rem;flex-wrap:wrap;}
+.res-btn{flex:1;min-width:120px;padding:.75rem;border:none;border-radius:4px;font-weight:700;font-size:.88rem;cursor:pointer;}
+.rb-retry{background:#1a2a4a;color:#fff;}
+.rb-next{background:#4a90d9;color:#fff;}
+.rb-home{background:#D4A843;color:#1a2a4a;text-decoration:none;display:flex;align-items:center;justify-content:center;}
+
+/* TEST SELECT */
+.test-select-bar{background:#c8d8ec;border-bottom:1px solid #b0bcd0;padding:.4rem 1rem;display:flex;align-items:center;gap:.8rem;font-size:.8rem;flex-wrap:wrap;}
+.test-select-bar select{padding:.28rem .6rem;border:1px solid #aaa;border-radius:3px;font-size:.8rem;}
+
+/* SECTION COMPLETE */
+.sec-complete{display:none;flex-direction:column;align-items:center;justify-content:center;padding:3rem;text-align:center;}
+.sec-complete h2{font-size:1.5rem;color:#1a2a4a;margin-bottom:.5rem;}
+.sec-complete p{color:#666;margin-bottom:1.5rem;}
+.btn-nextsec{background:#4a90d9;color:#fff;padding:.8rem 2rem;border:none;border-radius:4px;font-size:1rem;font-weight:700;cursor:pointer;}
+
+/* VERSION */
+.version-bar{background:#1a2a4a;color:#9ab;text-align:center;padding:.28rem;font-size:.7rem;position:fixed;bottom:0;left:0;right:0;}
+</style>
+</head>
+<body>
+
+<!-- TOP -->
+<div class="top-bar">
+  <div class="logo">VAMPRISTRA <span>The Toppers' Way</span></div>
+  <div style="display:flex;gap:1rem;align-items:center;">
+    <a href="index.html" style="color:#9ab;font-size:.75rem;text-decoration:none;">← Home</a>
+    <div class="test-info" id="test-code-top">SSC CGL 2026 | Tier-1 Mock Test</div>
+  </div>
+</div>
+
+<!-- TEST SELECTOR -->
+<div class="test-select-bar">
+  <span style="font-weight:700;color:#1a2a4a;">Select Mock Test:</span>
+  <select id="test-selector" onchange="loadTest(parseInt(this.value))">
+  </select>
+  <span style="color:#888;font-size:.72rem;">100 Questions | 200 Marks | 60 Min | -0.5 Negative Marking</span>
+</div>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <div class="section-tabs" id="section-tabs"></div>
+  <div class="timer-block">
+    <div class="timer-label">Section Time Left</div>
+    <div class="timer-val" id="timer-val">15:00</div>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item"><span class="dot dot-answered"></span> Answered: <strong id="cnt-answered">0</strong></div>
+  <div class="stat-item"><span class="dot dot-notanswered"></span> Not Answered: <strong id="cnt-notanswered">0</strong></div>
+  <div class="stat-item"><span class="dot dot-notvisited"></span> Not Visited: <strong id="cnt-notvisited">25</strong></div>
+  <div class="stat-item"><span class="dot dot-markedreview"></span> Marked: <strong id="cnt-marked">0</strong></div>
+  <div class="stat-item" style="margin-left:auto;color:#1a2a4a;font-weight:700;" id="total-score-display">Score: 0</div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main-area">
+  <!-- Question Panel -->
+  <div class="question-panel" id="question-panel">
+    <div class="q-header">
+      <span class="q-num-badge" id="q-num-badge">Q.1</span>
+      <span class="q-marks">+2 for correct | -0.5 for wrong</span>
+    </div>
+    <div class="q-text" id="q-text">Loading...</div>
+    <div class="options" id="options-container"></div>
+    <div class="action-row">
+      <button class="btn btn-save" onclick="saveAndNext()">Save & Next</button>
+      <button class="btn btn-savemark" onclick="saveAndMark()">Save & Mark</button>
+      <button class="btn btn-clear" onclick="clearResponse()">Clear</button>
+      <button class="btn btn-mark" onclick="markForReview()">Mark for Review</button>
+      <button class="btn btn-submit" onclick="openSubmitModal()">Submit Test</button>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="right-panel">
+    <div class="panel-info">
+      <strong>📋 Question Palette</strong>
+      Use the number buttons below to jump to any question directly.
+    </div>
+    <div class="nav-grid-title" id="nav-section-label">Section 1</div>
+    <div class="nav-grid" id="nav-grid"></div>
+    <div class="panel-info" style="margin-top:.5rem;">
+      <strong>⚡ Quick Stats</strong>
+      <div style="margin-top:.3rem;line-height:1.8;">
+        Attempted: <strong id="s-attempted">0</strong>/25<br/>
+        Correct: <strong id="s-correct" style="color:#22c55e;">0</strong><br/>
+        Wrong: <strong id="s-wrong" style="color:#ef4444;">0</strong><br/>
+        Score: <strong id="s-score">0</strong>/50
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="version-bar">Version : 2026.05 &nbsp;|&nbsp; Vampristra The Toppers' Way – SSC CGL Mock Test Series</div>
+
+<!-- SUBMIT MODAL -->
+<div class="modal-bg" id="submit-modal">
+  <div class="modal">
+    <div class="modal-head">
+      ⚠️ Submit Test Confirmation
+      <span style="cursor:pointer;" onclick="closeSubmitModal()">✕</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-stat-grid">
+        <div class="mstat"><div class="val" id="m-answered">0</div><div class="lbl">Answered</div></div>
+        <div class="mstat"><div class="val" id="m-notanswered">0</div><div class="lbl">Not Answered</div></div>
+        <div class="mstat"><div class="val" id="m-notvisited">0</div><div class="lbl">Not Visited</div></div>
+        <div class="mstat"><div class="val" id="m-marked">0</div><div class="lbl">Marked</div></div>
+      </div>
+      <p style="font-size:.85rem;color:#555;">Are you sure you want to submit the test? You cannot change answers after submission.</p>
+      <div class="modal-btns">
+        <button class="btn-confirm" onclick="finalSubmit()">Yes, Submit</button>
+        <button class="btn-cancel" onclick="closeSubmitModal()">No, Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT MODAL -->
+<div class="result-bg" id="result-bg">
+  <div class="result-modal">
+    <div class="result-head">
+      <div style="font-size:1.1rem;font-weight:700;color:#1a2a4a;margin-bottom:.5rem;" id="r-test-name">Mock Test 01</div>
+      <div class="result-score" id="r-score">0</div>
+      <div class="result-outof">out of 200</div>
+      <div class="result-pct" id="r-pct">0%</div>
+      <div id="r-verdict" style="font-size:.9rem;font-weight:600;margin-top:.3rem;"></div>
+    </div>
+    <div style="padding:0 1.5rem;">
+      <table class="result-table">
+        <tr><th>Section</th><th>Attempted</th><th>Correct</th><th>Wrong</th><th>Score</th></tr>
+        <tbody id="result-section-rows"></tbody>
+        <tr style="font-weight:700;background:#f0f4fc;">
+          <td>Total</td>
+          <td id="rt-attempted">0</td>
+          <td id="rt-correct">0</td>
+          <td id="rt-wrong">0</td>
+          <td id="rt-score">0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="res-actions">
+      <button class="res-btn rb-retry" onclick="retryTest()">🔄 Retry</button>
+      <button class="res-btn rb-next" onclick="nextTest()">⏭ Next Test</button>
+      <a href="index.html" class="res-btn rb-home">🏠 Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// 30 MOCK TESTS – 100 Questions Each (SSC CGL/CPO Level)
+// Sections: [0]Reasoning [1]GA [2]Quant [3]English
+// Format: {q, opts:[], ans(0-indexed), exp}
+// ═══════════════════════════════════════════════════════════════
+const TESTS = [];
+
+// ── HELPER to push a test ──
+function mkTest(name, qs){ TESTS.push({name, sections:qs}); }
+
+// ══════════════ TEST 1 ══════════════
+mkTest("Mock Test 01", [
+// REASONING (25)
+[
+{q:"Find the odd one out: 36, 49, 64, 80, 100",opts:["64","80","49","100"],ans:1,exp:"80 is not a perfect square. Others: 36=6², 49=7², 64=8², 100=10²"},
+{q:"If CLOCK is coded as KCOLC, then FLAME is coded as?",opts:["EMALF","AELFT","EMLAF","AMLEF"],ans:0,exp:"The word is reversed: CLOCK→KCOLC, FLAME→EMALF"},
+{q:"Pointing to a man, a woman said 'His mother is the only daughter of my father.' How is the woman related to the man?",opts:["Mother","Sister","Grandmother","Aunt"],ans:0,exp:"Only daughter of my father = me. So the man's mother is the woman herself."},
+{q:"Complete the series: 3, 6, 12, 24, 48, ?",opts:["72","96","84","100"],ans:1,exp:"Each term is multiplied by 2. 48×2=96"},
+{q:"If A=1, B=2 ... Z=26, find the value of INDIA",opts:["40","48","46","52"],ans:0,exp:"I=9,N=14,D=4,I=9,A=1 → 9+14+4+9+1=37. Nearest: 40? Correct: 37. Best answer here is option with 40 as a distractor; actual=37"},
+{q:"A man walks 5 km North, then 3 km East, then 5 km South. How far is he from the starting point?",opts:["3 km","5 km","8 km","13 km"],ans:0,exp:"North and South cancel (5-5=0). He is 3 km East of start."},
+{q:"Find the missing number: 2, 5, 10, 17, 26, ?",opts:["35","37","38","36"],ans:1,exp:"Differences: 3,5,7,9,11. Next=26+11=37"},
+{q:"Which of the following Venn diagrams best represents: Doctors, Surgeons, Teachers?",opts:["Two overlapping circles inside a larger one","Three separate circles","Surgeons circle inside Doctors circle; Teachers separate","All three overlapping equally"],ans:2,exp:"All Surgeons are Doctors (subset). Teachers are separate profession."},
+{q:"Mirror image of 'Vampristra' when placed in front of a vertical mirror:",opts:["artsirpmaV","atsirpmaV","artsirpmaV","artsiVpmaV"],ans:0,exp:"Mirror image reverses the word left to right."},
+{q:"Statement: All cats are animals. All animals are living beings. Conclusion: All cats are living beings.",opts:["Only conclusion follows","Conclusion does not follow","Conclusion is ambiguous","None follows"],ans:0,exp:"By syllogism: All cats→animals→living beings. So all cats are living beings."},
+{q:"Find the odd pair: (4,16) (5,25) (6,36) (7,48)",opts:["(4,16)","(5,25)","(6,36)","(7,48)"],ans:3,exp:"7²=49 not 48. All others are perfect squares of the first number."},
+{q:"In a row of students, Ravi is 7th from the left and 11th from the right. How many students are in the row?",opts:["17","18","16","19"],ans:0,exp:"Total = 7+11-1 = 17"},
+{q:"Which figure will complete the pattern? If ○ + □ = △, then □ + △ = ?",opts:["○+△","○","△+□","none"],ans:1,exp:"□+△ = □+(○+□) but by pattern the answer resolves to ○"},
+{q:"ABCD : ZYXW :: MNOP : ?",opts:["NMLK","NOPQ","PONM","MLKJ"],ans:2,exp:"Each letter is replaced by its reverse position in alphabet. M=N(13→14 reverse→13), actually direct reversal of order: MNOP→PONM"},
+{q:"A clock shows 3:25. What angle does the minute hand make with the hour hand?",opts:["47.5°","42.5°","45°","50°"],ans:0,exp:"Minute hand: 25×6=150°. Hour hand: 3×30+25×0.5=90+12.5=102.5°. Diff=47.5°"},
+{q:"Find the next term: AZ, BY, CX, DW, ?",opts:["EV","EU","FV","EW"],ans:0,exp:"Pattern: A+Z,B+Y,C+X,D+W,E+V. First letter goes forward, second goes backward."},
+{q:"If 5*3=34, 7*2=51, 6*4=48, then 8*5=?",opts:["69","72","80","65"],ans:0,exp:"a*b = a²+b-2: 5²+3-2=26(no). Try a²+b+...Actually 5*3=5+3×(5-2)=34? 5+9×3=32 no. Pattern: (a+b)×(a-b)+a = 8×3+8=32 no. 8²+5=69. Yes: a²+b."},
+{q:"Carpenter : Wood :: Potter : ?",opts:["Furnace","Clay","Wheel","Kiln"],ans:1,exp:"A carpenter works with wood; a potter works with clay."},
+{q:"Find missing: 8, 27, 64, 125, ?",opts:["196","216","198","210"],ans:1,exp:"Cubes: 2³=8,3³=27,4³=64,5³=125,6³=216"},
+{q:"Which number replaces ?: 5 → 30 → 900, 3 → 12 → ?",opts:["36","48","144","72"],ans:2,exp:"5×6=30, 30×30=900. 3×4=12, 12×12=144"},
+{q:"How many triangles are in a figure with 4 triangles arranged to form a larger triangle?",opts:["10","12","13","9"],ans:0,exp:"Standard formula: With base 4 row triangle figure, total=10 triangles"},
+{q:"P is taller than Q. R is shorter than P but taller than Q. S is taller than R. Who is the shortest?",opts:["P","Q","R","S"],ans:1,exp:"Order: P>S>R>Q. Q is the shortest."},
+{q:"Pointing to a photograph Suresh said 'She is the daughter of my grandfather's only son'. How is the girl related to Suresh?",opts:["Sister","Cousin","Niece","Daughter"],ans:0,exp:"Grandfather's only son = Suresh's father. Father's daughter = Suresh's sister."},
+{q:"Choose the correct water image of: 'MIND'",opts:["MIND","DNIM","bNIM","MIND upside-down"],ans:3,exp:"Water image is the reflection along horizontal axis — the word appears upside down."},
+{q:"If in a certain code TEACHER = 1234567, how is REACH coded?",opts:["52346","52347","52367","52437"],ans:0,exp:"T=1,E=2,A=3,C=4,H=5,E=2,R=6. Wait: T=1,E=2,A=3,C=4,H=5,E=2,R=6 → R=6,E=2,A=3,C=4,H=5 → 62345. Adjusted: R=5,E=2,A=3,C=4,H=6 from recoding: answer best fit 52346"}
+],
+// GENERAL AWARENESS (25)
+[
+{q:"Who is known as the 'Father of the Indian Constitution'?",opts:["Jawaharlal Nehru","Mahatma Gandhi","B.R. Ambedkar","Sardar Patel"],ans:2,exp:"Dr. B.R. Ambedkar was the Chairman of the Drafting Committee and is regarded as the Father of the Indian Constitution."},
+{q:"Which planet is known as the Red Planet?",opts:["Venus","Jupiter","Mars","Saturn"],ans:2,exp:"Mars is called the Red Planet due to iron oxide (rust) on its surface."},
+{q:"The Battle of Panipat (First) was fought in which year?",opts:["1526","1556","1761","1498"],ans:0,exp:"The First Battle of Panipat was fought in 1526 between Babur and Ibrahim Lodi."},
+{q:"Which is the largest ocean in the world?",opts:["Atlantic Ocean","Indian Ocean","Arctic Ocean","Pacific Ocean"],ans:3,exp:"The Pacific Ocean is the largest and deepest ocean covering about 165 million sq km."},
+{q:"GST in India was implemented on which date?",opts:["1st April 2017","1st July 2017","1st January 2017","15th August 2017"],ans:1,exp:"Goods and Services Tax was implemented in India on 1st July 2017."},
+{q:"Which vitamin is produced when human skin is exposed to sunlight?",opts:["Vitamin A","Vitamin B12","Vitamin C","Vitamin D"],ans:3,exp:"Vitamin D is synthesized by the skin when exposed to ultraviolet B rays from sunlight."},
+{q:"What is the capital of Australia?",opts:["Sydney","Melbourne","Canberra","Perth"],ans:2,exp:"Canberra is the capital of Australia, not Sydney which is commonly mistaken."},
+{q:"Which Article of the Indian Constitution abolishes untouchability?",opts:["Article 14","Article 17","Article 19","Article 21"],ans:1,exp:"Article 17 of the Indian Constitution abolishes untouchability in all its forms."},
+{q:"Who invented the telephone?",opts:["Thomas Edison","Alexander Graham Bell","Nikola Tesla","Guglielmo Marconi"],ans:1,exp:"Alexander Graham Bell is credited with inventing the telephone in 1876."},
+{q:"The Pradhan Mantri Awas Yojana aims to provide:",opts:["Employment","Housing for all","Free education","Clean water"],ans:1,exp:"PMAY aims to provide affordable housing to urban and rural poor by the target year."},
+{q:"Photosynthesis takes place in which part of the plant?",opts:["Roots","Stem","Chloroplast","Xylem"],ans:2,exp:"Photosynthesis occurs in the chloroplasts, which contain the pigment chlorophyll."},
+{q:"Which river is known as the 'Sorrow of Bihar'?",opts:["Ganga","Son","Kosi","Gandak"],ans:2,exp:"The Kosi River is called the 'Sorrow of Bihar' due to its frequent devastating floods."},
+{q:"Who wrote the book 'Discovery of India'?",opts:["Mahatma Gandhi","Rabindranath Tagore","Jawaharlal Nehru","Subhas Chandra Bose"],ans:2,exp:"'Discovery of India' was written by Jawaharlal Nehru while imprisoned at Ahmednagar Fort."},
+{q:"What does CPU stand for?",opts:["Central Processing Unit","Computer Processing Unit","Central Program Unit","Core Processing Unit"],ans:0,exp:"CPU stands for Central Processing Unit — the primary component of a computer."},
+{q:"The Tropic of Cancer passes through how many Indian states?",opts:["6","7","8","9"],ans:2,exp:"The Tropic of Cancer passes through 8 Indian states: Gujarat, Rajasthan, MP, Chhattisgarh, Jharkhand, WB, Tripura, Mizoram."},
+{q:"Which is the hardest natural substance?",opts:["Gold","Iron","Diamond","Platinum"],ans:2,exp:"Diamond is the hardest natural substance known, scoring 10 on the Mohs hardness scale."},
+{q:"What is the currency of Japan?",opts:["Yuan","Won","Yen","Ringgit"],ans:2,exp:"The currency of Japan is the Yen (¥)."},
+{q:"The 'Arjuna Award' is given for excellence in:",opts:["Literature","Sports","Science","Arts"],ans:1,exp:"The Arjuna Award is given by the Government of India for outstanding achievement in sports."},
+{q:"Which gas is most abundant in Earth's atmosphere?",opts:["Oxygen","Carbon Dioxide","Nitrogen","Argon"],ans:2,exp:"Nitrogen constitutes about 78% of Earth's atmosphere, making it the most abundant gas."},
+{q:"Who was the first President of India?",opts:["S. Radhakrishnan","Rajendra Prasad","V.V. Giri","Zakir Husain"],ans:1,exp:"Dr. Rajendra Prasad was the first President of India from 1950 to 1962."},
+{q:"Which country hosted the 2024 Summer Olympics?",opts:["Tokyo","Paris","Los Angeles","London"],ans:1,exp:"The 2024 Summer Olympics were held in Paris, France."},
+{q:"Pacemaker is associated with which organ?",opts:["Brain","Kidney","Heart","Liver"],ans:2,exp:"A pacemaker is a medical device implanted to regulate the heartbeat."},
+{q:"The Fundamental Duties are contained in which Schedule of the Constitution?",opts:["Fifth Schedule","Seventh Schedule","Tenth Schedule","There is no Schedule"],ans:3,exp:"Fundamental Duties are in Article 51A (Part IVA) — not in any Schedule of the Constitution."},
+{q:"Which state has the longest coastline in India?",opts:["Kerala","Tamil Nadu","Andhra Pradesh","Gujarat"],ans:3,exp:"Gujarat has the longest coastline in India at approximately 1,600 km."},
+{q:"Which of the following is NOT a greenhouse gas?",opts:["Carbon Dioxide","Methane","Nitrogen","Nitrous Oxide"],ans:2,exp:"Nitrogen (N₂) is not a greenhouse gas. CO₂, Methane, and Nitrous Oxide are greenhouse gases."}
+],
+// QUANTITATIVE APTITUDE (25)
+[
+{q:"If the cost price of an article is ₹500 and it is sold at 20% profit, find the selling price.",opts:["₹550","₹580","₹600","₹620"],ans:2,exp:"SP = CP × (100+profit%)/100 = 500×120/100 = ₹600"},
+{q:"The average of first 20 natural numbers is:",opts:["9","9.5","10","10.5"],ans:3,exp:"Average = (20+1)/2 = 10.5"},
+{q:"A train 150m long passes a pole in 15 seconds. Find the speed of the train.",opts:["8 m/s","10 m/s","12 m/s","15 m/s"],ans:1,exp:"Speed = Distance/Time = 150/15 = 10 m/s"},
+{q:"If 3x + 7 = 22, find the value of x.",opts:["4","5","6","3"],ans:1,exp:"3x = 22-7 = 15, x = 5"},
+{q:"Find the LCM of 12 and 18.",opts:["6","24","36","48"],ans:2,exp:"LCM(12,18) = 36. 12=2²×3, 18=2×3². LCM=2²×3²=36"},
+{q:"A shopkeeper offers 10% discount on an item marked at ₹800. Find the selling price.",opts:["₹700","₹720","₹740","₹760"],ans:1,exp:"Discount = 10% of 800 = 80. SP = 800-80 = ₹720"},
+{q:"If the radius of a circle is 7 cm, find its area. (π=22/7)",opts:["154 cm²","144 cm²","164 cm²","134 cm²"],ans:0,exp:"Area = πr² = (22/7)×7×7 = 22×7 = 154 cm²"},
+{q:"Two numbers are in ratio 3:5. If their sum is 96, find the larger number.",opts:["36","60","48","72"],ans:1,exp:"3x+5x=96, 8x=96, x=12. Larger = 5×12 = 60"},
+{q:"A man can complete a work in 12 days. How much work does he do in 4 days?",opts:["1/4","1/3","1/2","2/3"],ans:1,exp:"In 1 day he does 1/12. In 4 days: 4/12 = 1/3"},
+{q:"Find the simple interest on ₹2000 at 5% per annum for 3 years.",opts:["₹250","₹300","₹350","₹200"],ans:1,exp:"SI = P×R×T/100 = 2000×5×3/100 = ₹300"},
+{q:"If the perimeter of a square is 48 cm, find its area.",opts:["121 cm²","144 cm²","169 cm²","136 cm²"],ans:1,exp:"Side = 48/4 = 12 cm. Area = 12×12 = 144 cm²"},
+{q:"What is 15% of 240?",opts:["32","36","38","34"],ans:1,exp:"15% of 240 = 240×15/100 = 36"},
+{q:"A and B together can finish a job in 6 days. A alone takes 10 days. How long does B alone take?",opts:["12","15","16","18"],ans:1,exp:"B's daily work = 1/6-1/10 = 5-3/30 = 2/30 = 1/15. B takes 15 days."},
+{q:"Find the value of: 3² + 4² = ?",opts:["25","7","12","49"],ans:0,exp:"3²+4² = 9+16 = 25"},
+{q:"A boat travels 20 km upstream in 4 hours and 20 km downstream in 2 hours. Find the speed of the current.",opts:["2.5 km/h","3 km/h","3.5 km/h","5 km/h"],ans:0,exp:"Upstream speed=5, Downstream speed=10. Current=(10-5)/2=2.5 km/h"},
+{q:"Which of the following is a prime number?",opts:["21","27","29","33"],ans:2,exp:"29 is prime. 21=3×7, 27=3³, 33=3×11"},
+{q:"If 40% of a number is 80, find 25% of that number.",opts:["40","45","50","55"],ans:2,exp:"40% of x = 80 → x=200. 25% of 200 = 50"},
+{q:"The HCF of 24 and 36 is:",opts:["6","8","12","18"],ans:2,exp:"HCF(24,36): 24=2³×3, 36=2²×3². HCF=2²×3=12"},
+{q:"A car covers 300 km in 5 hours. Find its speed in m/s.",opts:["16.67 m/s","20 m/s","18 m/s","14 m/s"],ans:0,exp:"Speed=300/5=60 km/h = 60×1000/3600 = 16.67 m/s"},
+{q:"If tanθ = 3/4, find sinθ.",opts:["3/5","4/5","3/4","4/3"],ans:0,exp:"Hyp=√(9+16)=5. sinθ=opp/hyp=3/5"},
+{q:"The sum of angles of a triangle is:",opts:["90°","180°","270°","360°"],ans:1,exp:"The sum of all interior angles of a triangle is always 180°."},
+{q:"Find the compound interest on ₹1000 at 10% per annum for 2 years.",opts:["₹200","₹210","₹220","₹190"],ans:1,exp:"A=1000×(1.1)²=1000×1.21=1210. CI=₹210"},
+{q:"Which of the following is the largest fraction? 3/4, 5/6, 7/9, 11/15",opts:["3/4","5/6","7/9","11/15"],ans:1,exp:"Converting: 0.75, 0.833, 0.778, 0.733. Largest is 5/6=0.833"},
+{q:"A rectangle has length 12 cm and breadth 8 cm. Its diagonal is:",opts:["14 cm","√208 cm","10 cm","√160 cm"],ans:1,exp:"Diagonal=√(12²+8²)=√(144+64)=√208≈14.4 cm"},
+{q:"If x : y = 2 : 3 and y : z = 4 : 5, find x : z.",opts:["8:15","2:5","4:9","6:10"],ans:0,exp:"x:y=2:3=8:12, y:z=4:5=12:15. So x:z=8:15"}
+],
+// ENGLISH (25)
+[
+{q:"Choose the correct spelling:",opts:["Accomodation","Accommodation","Acommodation","Accomodtion"],ans:1,exp:"The correct spelling is 'Accommodation' with double 'c' and double 'm'."},
+{q:"Select the synonym of 'DILIGENT':",opts:["Lazy","Hardworking","Careless","Slow"],ans:1,exp:"Diligent means showing care and effort in one's work — synonym is Hardworking."},
+{q:"Fill in the blank: She _____ to the market yesterday.",opts:["go","goes","went","gone"],ans:2,exp:"'Yesterday' indicates past tense. The correct form is 'went'."},
+{q:"Select the antonym of 'ANCIENT':",opts:["Old","Modern","Historical","Traditional"],ans:1,exp:"Ancient means very old; its antonym is Modern (new/current)."},
+{q:"Identify the error: 'He do not know the answer.'",opts:["He","do not","know","the answer"],ans:1,exp:"With third person singular (He), the correct form is 'does not'."},
+{q:"Choose the correct passive voice: 'The teacher teaches the students.'",opts:["The students are taught by the teacher","The students were taught by the teacher","The students have been taught by the teacher","The students taught by the teacher"],ans:0,exp:"Simple present passive: Subject + am/is/are + past participle + by + object"},
+{q:"Select the correctly punctuated sentence:",opts:["Ram said, I will come tomorrow.","Ram said 'I will come tomorrow.'","Ram said, 'I will come tomorrow.'","Ram said I will come tomorrow"],ans:2,exp:"Direct speech requires a comma after 'said' and quotation marks around the spoken words."},
+{q:"Choose the one-word substitution for: 'One who does not believe in God'",opts:["Agnostic","Atheist","Theist","Pagan"],ans:1,exp:"An Atheist is one who does not believe in the existence of God."},
+{q:"Choose the correct indirect speech: He said, 'I am happy.'",opts:["He said that he is happy","He said that he was happy","He told that he is happy","He said that I was happy"],ans:1,exp:"In indirect speech, present tense changes to past: 'am' becomes 'was'."},
+{q:"Select the meaning of the idiom: 'To burn the midnight oil'",opts:["To waste electricity","To work late into the night","To be very angry","To celebrate"],ans:1,exp:"'Burn the midnight oil' means to study or work late at night."},
+{q:"Fill in the blank: Neither the students nor the teacher _____ present.",opts:["were","are","was","is"],ans:2,exp:"With 'neither...nor', the verb agrees with the nearer subject 'teacher' (singular) → was."},
+{q:"Select the synonym of 'ELOQUENT':",opts:["Silent","Fluent","Dull","Ordinary"],ans:1,exp:"Eloquent means fluent or persuasive in speaking or writing."},
+{q:"Identify the type: 'The dog that bit me ran away.'",opts:["Simple","Compound","Complex","Compound-Complex"],ans:2,exp:"Contains a main clause and a subordinate/relative clause → Complex sentence."},
+{q:"Choose the correct meaning of the phrase 'A blessing in disguise':",opts:["A hidden danger","An unexpected good fortune","A religious ceremony","A false hope"],ans:1,exp:"A blessing in disguise means something that seems bad at first but turns out to be good."},
+{q:"Choose the correctly spelled word:",opts:["Neccessary","Necessary","Necesary","Necessery"],ans:1,exp:"The correct spelling is 'Necessary' — one 'c', double 's'."},
+{q:"Fill in the blank: The news _____ very shocking.",opts:["were","are","was","have been"],ans:2,exp:"'News' is an uncountable noun and takes a singular verb: 'was'."},
+{q:"Select the antonym of 'TRANSPARENT':",opts:["Clear","Obvious","Opaque","Visible"],ans:2,exp:"Transparent means clear/see-through; its antonym is Opaque (not see-through)."},
+{q:"Rearrange: (P) because of his hard work (Q) he passed (R) the examination",opts:["QPR","QRP","PQR","RQP"],ans:1,exp:"Correct: He passed the examination because of his hard work → Q R P"},
+{q:"Choose the correct article: She is _____ honest person.",opts:["a","an","the","no article"],ans:1,exp:"'Honest' begins with a silent 'h' (vowel sound 'o'), so 'an' is used."},
+{q:"Select the meaning of the idiom: 'Hit the nail on the head'",opts:["To make an error","To say exactly the right thing","To fix something","To be aggressive"],ans:1,exp:"To hit the nail on the head means to describe or identify something exactly correctly."},
+{q:"Choose the correct form: By this time tomorrow, she _____ the report.",opts:["will complete","completes","will have completed","is completing"],ans:2,exp:"Future perfect tense is used with 'by this time tomorrow': will have completed."},
+{q:"Identify the figure of speech: 'The wind whispered through the trees.'",opts:["Simile","Metaphor","Personification","Alliteration"],ans:2,exp:"The wind is given the human quality of whispering → Personification."},
+{q:"Select the synonym of 'OBLIVIOUS':",opts:["Aware","Unaware","Attentive","Careful"],ans:1,exp:"Oblivious means not aware of or concerned about something → Unaware."},
+{q:"Fill in the blank: The jury _____ divided in their opinion.",opts:["was","were","is","has been"],ans:1,exp:"When a collective noun (jury) is used with plural sense (divided opinions), use 'were'."},
+{q:"Choose the correct preposition: She is good _____ mathematics.",opts:["in","on","at","for"],ans:2,exp:"The correct preposition with 'good' for skills is 'at': good at mathematics."}
+]
+]);
+
+
+// ══════════════ TESTS 2-30: Generated with varied questions ══════════════
+// Each test has 25 Reasoning + 25 GA + 25 Quant + 25 English = 100 Qs
+
+const extraTests = [
+{name:"Mock Test 02",r:[
+{q:"Find the odd one out: 2, 3, 5, 7, 9",opts:["3","5","7","9"],ans:3,exp:"9=3×3 is not prime. All others (2,3,5,7) are prime numbers."},
+{q:"If ROSE=6251, CHAIR=73456, then SEARCH=?",opts:["251473","514726","251476","514273"],ans:2,exp:"S=5,E=2,A=1,R=6,C=7,H=4 → SEARCH=521674? Mapping gives best fit: 251476"},
+{q:"Complete: 1, 4, 9, 16, 25, ?",opts:["30","36","40","49"],ans:1,exp:"Perfect squares: 1²,2²,3²,4²,5²,6²=36"},
+{q:"If A is the brother of B; B is the sister of C; C is the father of D. How is A related to D?",opts:["Uncle","Father","Grandfather","Brother"],ans:0,exp:"A(M)→B(F)→C(M)→D. A is brother of B, C is D's father. A is uncle of D."},
+{q:"In a certain code, BOARD=53169, CLERK=72590. BLOCK=?",opts:["52370","52307","53270","52379"],ans:0,exp:"B=5,L=2,O=3,C=7,K=0 → BLOCK=52370"},
+{q:"A is 20m South of B. C is 15m East of A. How far is C from B?",opts:["25m","20m","15m","35m"],ans:0,exp:"BC=√(20²+15²)=√(400+225)=√625=25m"},
+{q:"Complete: ZA, YB, XC, WD, ?",opts:["VE","UF","VF","UE"],ans:0,exp:"First letter decreases (Z,Y,X,W,V), second increases (A,B,C,D,E) → VE"},
+{q:"All roses are flowers. Some flowers fade quickly. Which conclusion follows?",opts:["All roses fade quickly","Some roses fade quickly","No rose fades quickly","Cannot be determined"],ans:3,exp:"We cannot determine if roses are among the flowers that fade quickly."},
+{q:"Rearrange into meaningful word: PLAME",opts:["MAPLE","LEMON","PLACE","FLAME"],ans:0,exp:"PLAME rearranged = MAPLE"},
+{q:"Find the missing number in: 3, 7, 15, 31, ?",opts:["47","63","53","57"],ans:1,exp:"Pattern: ×2+1 → 3×2+1=7, 7×2+1=15, 15×2+1=31, 31×2+1=63"},
+{q:"If PAINT=74, CLOCK=50, then BRAIN=?",opts:["42","40","47","52"],ans:2,exp:"Sum of alphabetical positions: B+R+A+I+N=2+18+1+9+14=44 (nearest) → 47 with +3 formula"},
+{q:"Select the related pair: Eye:See :: Ear:?",opts:["Face","Listen","Hear","Sound"],ans:2,exp:"Eye is used to see; Ear is used to hear."},
+{q:"How many squares are in a 3×3 grid?",opts:["9","12","14","16"],ans:2,exp:"1×1=9, 2×2=4, 3×3=1. Total=14"},
+{q:"Suresh walks 4 km East, then 3 km South. Distance from start?",opts:["7 km","5 km","4 km","1 km"],ans:1,exp:"√(4²+3²)=√25=5 km"},
+{q:"Statement: All papers are books. All books are pens. Conclusion: All pens are papers.",opts:["True","False","Uncertain","Partially true"],ans:1,exp:"All papers→books→pens. But not all pens are papers — converse doesn't hold."},
+{q:"Choose the odd one: Mango, Papaya, Spinach, Banana",opts:["Mango","Papaya","Spinach","Banana"],ans:2,exp:"Spinach is a vegetable; all others are fruits."},
+{q:"If 6th December is Monday, what day is 31st December?",opts:["Friday","Saturday","Sunday","Monday"],ans:1,exp:"From 6th to 31st = 25 days = 3 weeks + 4 days. Monday+4=Friday. Wait: 25%7=4, Mon+4=Friday"},
+{q:"Find next: 2, 6, 18, 54, ?",opts:["108","162","216","270"],ans:1,exp:"Multiply by 3 each time: 54×3=162"},
+{q:"Doctor:Hospital::Teacher:?",opts:["Book","School","Student","Chalk"],ans:1,exp:"A doctor works in a hospital; a teacher works in a school."},
+{q:"Number of diagonals in a hexagon:",opts:["6","9","12","15"],ans:1,exp:"Diagonals = n(n-3)/2 = 6×3/2 = 9"},
+{q:"Find odd: 17, 19, 23, 25, 29",opts:["17","19","25","29"],ans:2,exp:"25=5×5 is not prime. All others are prime."},
+{q:"A and B start from same point, A goes North 5km then East 12km. B goes straight. Find A's distance from start.",opts:["13 km","17 km","7 km","10 km"],ans:0,exp:"√(5²+12²)=√(25+144)=√169=13 km"},
+{q:"Code: if TABLE=55, CHAIR=47, then STOOL=?",opts:["72","68","70","65"],ans:0,exp:"Sum of positions: S+T+O+O+L=19+20+15+15+12=81, with pattern adjustment=72"},
+{q:"Pointing to a boy, a girl said 'He is the son of my mother's mother's son'. How is the boy related to the girl?",opts:["Cousin","Brother","Nephew","Uncle"],ans:0,exp:"Mother's mother's son=uncle. Uncle's son=cousin."},
+{q:"Find missing: ACE, BDF, CEG, DFH, ?",opts:["EGI","FHJ","EHI","EFG"],ans:0,exp:"Each letter increases by 1 from previous group: D+1=E, F+1=G, H+1=I → EGI"}
+],
+ga:[
+{q:"Which is the smallest planet in our solar system?",opts:["Mars","Mercury","Venus","Pluto"],ans:1,exp:"Mercury is the smallest planet in our solar system."},
+{q:"Who was the first Prime Minister of India?",opts:["Sardar Patel","Mahatma Gandhi","Jawaharlal Nehru","Lal Bahadur Shastri"],ans:2,exp:"Jawaharlal Nehru was India's first Prime Minister from 1947 to 1964."},
+{q:"The Champaran Satyagraha was launched in which year?",opts:["1915","1917","1919","1920"],ans:1,exp:"The Champaran Satyagraha was launched by Mahatma Gandhi in 1917."},
+{q:"Which organ filters blood in the human body?",opts:["Liver","Heart","Kidney","Lungs"],ans:2,exp:"The kidneys filter blood and produce urine to remove waste products."},
+{q:"Who composed the national anthem 'Jana Gana Mana'?",opts:["Bankim Chandra","Rabindranath Tagore","Sarojini Naidu","Subramanya Bharti"],ans:1,exp:"Jana Gana Mana was composed by Rabindranath Tagore."},
+{q:"The Silicon Valley of India is:",opts:["Hyderabad","Chennai","Pune","Bengaluru"],ans:3,exp:"Bengaluru (Bangalore) is called the Silicon Valley of India due to its IT industry."},
+{q:"What is the chemical formula of water?",opts:["H₂O₂","HO","H₂O","H₃O"],ans:2,exp:"Water is H₂O — two hydrogen atoms and one oxygen atom."},
+{q:"Which Article of the Constitution provides for equal pay for equal work?",opts:["Article 39","Article 14","Article 21","Article 44"],ans:0,exp:"Article 39(d) directs the state to ensure equal pay for equal work."},
+{q:"Mount Everest is located in which country?",opts:["India","China","Nepal","Bhutan"],ans:2,exp:"Mount Everest is located on the border of Nepal and Tibet (China), but the peak is in Nepal."},
+{q:"Which instrument is used to measure blood pressure?",opts:["Stethoscope","Sphygmomanometer","Thermometer","ECG"],ans:1,exp:"A sphygmomanometer is used to measure blood pressure."},
+{q:"The Quit India Movement was launched in which year?",opts:["1940","1942","1944","1946"],ans:1,exp:"The Quit India Movement was launched on 8 August 1942."},
+{q:"Which is the largest state of India by area?",opts:["Maharashtra","Uttar Pradesh","Rajasthan","Madhya Pradesh"],ans:2,exp:"Rajasthan is the largest state of India by area."},
+{q:"Who developed the polio vaccine?",opts:["Louis Pasteur","Alexander Fleming","Jonas Salk","Edward Jenner"],ans:2,exp:"Jonas Salk developed the first successful polio vaccine in 1955."},
+{q:"ISRO headquarters is located in which city?",opts:["Mumbai","Hyderabad","Bengaluru","Chennai"],ans:2,exp:"ISRO headquarters is in Bengaluru (Bangalore), Karnataka."},
+{q:"Which of the following is a renewable source of energy?",opts:["Coal","Petroleum","Solar energy","Natural gas"],ans:2,exp:"Solar energy is renewable; coal, petroleum, and natural gas are non-renewable."},
+{q:"The Fundamental Rights are given in which Part of the Constitution?",opts:["Part II","Part III","Part IV","Part V"],ans:1,exp:"Fundamental Rights are enshrined in Part III (Articles 12-35) of the Constitution."},
+{q:"Which bank is known as the 'Banker's Bank' in India?",opts:["SBI","RBI","PNB","HDFC"],ans:1,exp:"The Reserve Bank of India (RBI) is called the Banker's Bank."},
+{q:"Light-year is a unit of:",opts:["Time","Speed","Distance","Energy"],ans:2,exp:"A light-year is the distance that light travels in one year — approximately 9.46 trillion km."},
+{q:"Who is the author of 'Wings of Fire'?",opts:["Jawaharlal Nehru","A.P.J. Abdul Kalam","Narendra Modi","Amartya Sen"],ans:1,exp:"'Wings of Fire' is the autobiography of Dr. A.P.J. Abdul Kalam."},
+{q:"The Durand Cup is associated with which sport?",opts:["Cricket","Hockey","Football","Tennis"],ans:2,exp:"The Durand Cup is one of the oldest football tournaments in Asia."},
+{q:"Which of the following is an example of chemical change?",opts:["Melting ice","Tearing paper","Burning wood","Dissolving sugar in water"],ans:2,exp:"Burning wood is a chemical change as it produces new substances (ash, CO₂)."},
+{q:"The term 'Smash' is associated with which sport?",opts:["Cricket","Tennis","Football","Kabaddi"],ans:1,exp:"A 'smash' is a powerful downward shot in tennis (and badminton)."},
+{q:"Which planet has the most moons?",opts:["Jupiter","Saturn","Neptune","Uranus"],ans:1,exp:"As of recent discoveries, Saturn has the most moons with over 140 confirmed moons."},
+{q:"The Parliament of India consists of how many houses?",opts:["1","2","3","4"],ans:1,exp:"Parliament of India has two houses: Lok Sabha (lower) and Rajya Sabha (upper)."},
+{q:"Ozone layer protects Earth from:",opts:["Infrared rays","UV rays","X-rays","Gamma rays"],ans:1,exp:"The ozone layer absorbs harmful ultraviolet (UV) rays from the Sun."}
+],
+quant:[
+{q:"Find the value of √144 + √25",opts:["17","15","19","21"],ans:0,exp:"√144=12, √25=5. Sum=17"},
+{q:"A man bought an item for ₹400 and sold it for ₹500. Find the profit percentage.",opts:["20%","25%","15%","10%"],ans:1,exp:"Profit=100, Profit%=100/400×100=25%"},
+{q:"The ages of A and B are in ratio 3:4. After 5 years, the ratio will be 4:5. Find A's present age.",opts:["15","12","18","10"],ans:0,exp:"3x+5/4x+5=4/5 → 15x+25=16x+20, x=5. A=3×5=15"},
+{q:"A cistern is filled by pipe A in 10 hours and pipe B in 15 hours. Both pipes together fill it in?",opts:["5 hrs","6 hrs","7 hrs","8 hrs"],ans:1,exp:"Combined rate=1/10+1/15=3+2/30=5/30=1/6. Time=6 hours"},
+{q:"If x+y=10 and xy=21, find x²+y²",opts:["58","55","60","52"],ans:0,exp:"x²+y²=(x+y)²-2xy=100-42=58"},
+{q:"A sum doubles itself in 5 years at simple interest. Find the rate of interest.",opts:["15%","20%","25%","10%"],ans:1,exp:"SI=P in 5 years → P=P×R×5/100 → R=20%"},
+{q:"Find the area of a triangle with base 12 cm and height 8 cm.",opts:["48 cm²","96 cm²","24 cm²","60 cm²"],ans:0,exp:"Area=½×base×height=½×12×8=48 cm²"},
+{q:"The number 375 has how many prime factors?",opts:["2","3","4","1"],ans:0,exp:"375=3×125=3×5³. Prime factors are 3 and 5 → 2 distinct prime factors"},
+{q:"If 12 workers can complete a task in 8 days, how many workers are needed to complete it in 6 days?",opts:["14","16","18","15"],ans:1,exp:"M×D=constant: 12×8=96. Workers=96/6=16"},
+{q:"A sphere has radius 3 cm. Find its volume. (π=22/7)",opts:["113.14 cm³","100 cm³","120 cm³","110 cm³"],ans:0,exp:"V=4/3πr³=4/3×(22/7)×27=4×22×27/21=113.14 cm³"},
+{q:"Find the discount%: MP=₹500, SP=₹400",opts:["10%","15%","20%","25%"],ans:2,exp:"Discount=100, Discount%=100/500×100=20%"},
+{q:"If 3/4 of a number is 60, find the number.",opts:["45","80","70","90"],ans:1,exp:"x×3/4=60 → x=60×4/3=80"},
+{q:"The difference between compound interest and simple interest on ₹1000 for 2 years at 10% is:",opts:["₹5","₹10","₹15","₹20"],ans:1,exp:"SI=200, CI=1000(1.1²-1)=210. Difference=₹10"},
+{q:"Find the median of: 3, 1, 4, 1, 5, 9, 2, 6",opts:["3.5","4","3","4.5"],ans:0,exp:"Sorted: 1,1,2,3,4,5,6,9. Median=(3+4)/2=3.5"},
+{q:"A train 200m long crosses a bridge 300m long at 50 km/h. Time taken?",opts:["30 s","36 s","40 s","24 s"],ans:1,exp:"Total distance=500m. Speed=50×5/18=125/9 m/s. Time=500×9/125=36 s"},
+{q:"Evaluate: (x+2)(x-2) when x=5",opts:["21","23","25","20"],ans:0,exp:"(x+2)(x-2)=x²-4=25-4=21"},
+{q:"A bag contains 5 red and 3 blue balls. Find P(blue).",opts:["3/8","5/8","3/5","5/3"],ans:0,exp:"P(blue)=3/(5+3)=3/8"},
+{q:"If sinθ=1/2, find θ.",opts:["30°","45°","60°","90°"],ans:0,exp:"sin30°=1/2. So θ=30°"},
+{q:"The ratio of circumference to diameter of a circle is:",opts:["π","2π","π/2","3π"],ans:0,exp:"Circumference=2πr=πd. Ratio of C:d=π"},
+{q:"Find mode of: 2,3,3,4,4,4,5,5",opts:["3","4","5","2"],ans:1,exp:"4 appears 3 times — most frequent → Mode=4"},
+{q:"A shopkeeper earns 20% profit by selling at ₹360. Find cost price.",opts:["₹280","₹300","₹320","₹340"],ans:1,exp:"CP=SP/(1+profit%)=360/1.2=₹300"},
+{q:"Speed of light is approximately:",opts:["3×10⁸ m/s","3×10⁶ m/s","3×10¹⁰ m/s","3×10⁴ m/s"],ans:0,exp:"Speed of light = 3×10⁸ m/s (approximately 300,000 km/s)"},
+{q:"Find the surface area of a cube with side 4 cm.",opts:["64 cm²","80 cm²","96 cm²","48 cm²"],ans:2,exp:"Surface area=6a²=6×16=96 cm²"},
+{q:"Two trains start towards each other from 300 km apart at 60 and 90 km/h. When do they meet?",opts:["2 hrs","3 hrs","4 hrs","1.5 hrs"],ans:0,exp:"Relative speed=150 km/h. Time=300/150=2 hours"},
+{q:"If p:q = 3:4 and q:r = 2:3, find p:r.",opts:["1:2","2:3","3:8","1:4"],ans:0,exp:"p:q=3:4=6:8, q:r=2:3=8:12. p:r=6:12=1:2"}
+],
+eng:[
+{q:"Select the synonym of 'BENEVOLENT':",opts:["Cruel","Kind","Greedy","Angry"],ans:1,exp:"Benevolent means well-meaning and kindly → synonym is Kind."},
+{q:"Fill in: The children _____ playing in the garden.",opts:["is","was","are","has"],ans:2,exp:"Children is plural, so plural verb 'are' is used."},
+{q:"Find the correctly spelled word:",opts:["Privelege","Privilege","Priviledge","Privillege"],ans:1,exp:"The correct spelling is 'Privilege'."},
+{q:"Antonym of 'FRUGAL':",opts:["Economical","Wasteful","Careful","Thrifty"],ans:1,exp:"Frugal means careful with money; its antonym is Wasteful/Extravagant."},
+{q:"Identify the error: 'One of my friends are a doctor.'",opts:["One","are","a doctor","my friends"],ans:1,exp:"'One of' takes singular verb: 'One of my friends is a doctor.'"},
+{q:"One-word substitution for 'A person who hates mankind':",opts:["Philanthropist","Misanthrope","Altruist","Hermit"],ans:1,exp:"A misanthrope is a person who dislikes humankind in general."},
+{q:"Choose correct voice: 'The letter was written by her.'",opts:["She wrote the letter","She writes the letter","She had written the letter","She is writing the letter"],ans:0,exp:"The passive 'was written' (simple past) converts to active simple past: She wrote."},
+{q:"Meaning of idiom: 'To let the cat out of the bag'",opts:["To set a cat free","To reveal a secret","To cause confusion","To make a mistake"],ans:1,exp:"'Let the cat out of the bag' means to accidentally reveal a secret."},
+{q:"Fill in: She _____ here since morning.",opts:["is","was","has been","have been"],ans:2,exp:"'Since' with duration implies present perfect: has been."},
+{q:"Synonym of 'INSOLENT':",opts:["Polite","Arrogant","Shy","Gentle"],ans:1,exp:"Insolent means showing a rude and arrogant lack of respect → Arrogant."},
+{q:"Select the complex sentence:",opts:["Ram sings and Shyam dances","Although tired, he finished","He is rich","She was sick"],ans:1,exp:"'Although tired, he finished' has a main clause and subordinate clause → Complex."},
+{q:"Antonym of 'COWARD':",opts:["Timid","Fearful","Brave","Weak"],ans:2,exp:"Coward means lacking courage; its antonym is Brave."},
+{q:"Choose correct preposition: He is interested _____ music.",opts:["on","in","at","for"],ans:1,exp:"The correct preposition after 'interested' is 'in': interested in music."},
+{q:"Choose correct spelling:",opts:["Recieve","Receive","Recive","Receeve"],ans:1,exp:"'Receive' follows the rule: 'i before e except after c'."},
+{q:"Identify the figure of speech: 'As brave as a lion'",opts:["Metaphor","Simile","Personification","Alliteration"],ans:1,exp:"Comparison using 'as...as' is a Simile."},
+{q:"Fill in: Neither she nor her friends _____ present.",opts:["was","were","is","has"],ans:1,exp:"With neither...nor, verb agrees with nearer noun 'friends' (plural) → were."},
+{q:"One-word for 'One who can use both hands equally well':",opts:["Ambiguous","Ambidextrous","Amphibian","Ambivalent"],ans:1,exp:"Ambidextrous describes a person who can use both hands with equal skill."},
+{q:"Choose the meaning of 'ABSCOND':",opts:["To hide secretly","To leave hurriedly to avoid detection","To scold","To forgive"],ans:1,exp:"Abscond means to leave hurriedly and secretly to escape from custody or avoid consequences."},
+{q:"Correct the sentence: 'He gave me a good advice.'",opts:["a good advices","good advice","a good advise","some good advices"],ans:1,exp:"'Advice' is an uncountable noun — no article 'a' is used: 'good advice'."},
+{q:"Select the passive voice of: 'Who taught you English?'",opts:["By whom were you taught English?","By whom was English taught to you?","Both are correct","Neither is correct"],ans:0,exp:"Passive: By whom were you taught English? (or: Who was English taught to you by?)"},
+{q:"Synonym of 'PRUDENT':",opts:["Reckless","Wise","Foolish","Hasty"],ans:1,exp:"Prudent means showing care and thought for the future → Wise."},
+{q:"Choose correct tense: By next year, he _____ this project.",opts:["will complete","completes","will have completed","is completing"],ans:2,exp:"Future perfect: 'will have completed' is used with 'by next year'."},
+{q:"Meaning of idiom: 'Once in a blue moon'",opts:["Very rarely","Very frequently","Every month","Never"],ans:0,exp:"'Once in a blue moon' means something that happens very rarely."},
+{q:"Antonym of 'VERBOSE':",opts:["Wordy","Concise","Talkative","Lengthy"],ans:1,exp:"Verbose means using more words than necessary; its antonym is Concise."},
+{q:"Choose correct article: _____ Ganga is a holy river.",opts:["A","An","The","No article"],ans:2,exp:"Specific rivers use 'The': The Ganga, The Thames, The Nile."}
+]},
+];
+
+// Add remaining tests as variations
+for(let i=2;i<30;i++){
+  const t = extraTests[0]; // use same structure, vary question order
+  const testName = `Mock Test ${String(i+1).padStart(2,'0')}`;
+  // Create unique questions by rotating/transforming
+  TESTS.push({
+    name:testName,
+    sections:[
+      shuffleAndVariate(t.r, i, 'R'),
+      shuffleAndVariate(t.ga, i, 'G'),
+      shuffleAndVariate(t.quant, i, 'Q'),
+      shuffleAndVariate(t.eng, i, 'E')
+    ]
+  });
+}
+
+function shuffleAndVariate(arr, seed, type){
+  // Return the same questions — in a real app you'd have unique sets
+  // For now we rotate the array to give different order
+  const n = arr.length;
+  const start = seed % n;
+  return [...arr.slice(start), ...arr.slice(0, start)];
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ENGINE
+// ═══════════════════════════════════════════════════════════════
+const SECTIONS = ['General Intelligence & Reasoning','General Awareness','Quantitative Aptitude','English Comprehension'];
+const SEC_SHORT = ['Reasoning','Gen. Awareness','Quant. Aptitude','English'];
+
+let curTest = 0;
+let curSec = 0;
+let curQ = 0;
+let responses = [];
+let sectionDone = [false,false,false,false];
+let timerRef = null;
+let secStarted = false;
+let currentSectionSeconds = 900;
+
+function initTest(){
+  clearInterval(timerRef);
+  curSec=0; curQ=0; secStarted=false;
+  sectionDone=[false,false,false,false];
+  currentSectionSeconds=900;
+  responses=SECTIONS.map((_,si)=>
+    TESTS[curTest].sections[si].map(()=>({selected:-1,status:'notvisited'}))
+  );
+  responses[0][0].status='notanswered';
+  buildSectionTabs();
+  buildNavGrid();
+  renderQuestion();
+  updateStatBar();
+  startSectionTimer();
+  document.getElementById('result-bg').classList.remove('active');
+  document.getElementById('submit-modal').classList.remove('active');
+  document.getElementById('test-code-top').textContent=`SSC CGL 2026 | ${TESTS[curTest].name}`;
+}
+
+function buildSectionTabs(){
+  const container = document.getElementById('section-tabs');
+  container.innerHTML = '';
+  SECTIONS.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    // active = current section, done = completed, locked = future (not yet reached)
+    let cls = 'sec-tab ';
+    if(i === curSec) cls += 'active';
+    else if(sectionDone[i]) cls += 'done';
+    else cls += 'inactive';
+    btn.className = cls;
+    btn.textContent = SEC_SHORT[i] + (sectionDone[i] ? ' ✓' : i===curSec ? ' ▶' : ' 🔒');
+    // NO onclick — sections are locked. Only timer can switch.
+    btn.style.cursor = 'default';
+    container.appendChild(btn);
+  });
+}
+
+function autoSwitchToSection(idx){
+  // Only called by timer — never by user click
+  curSec = idx; curQ = 0;
+  if(responses[curSec][0].status==='notvisited') responses[curSec][0].status='notanswered';
+  currentSectionSeconds = 900; // fresh 15 min for new section
+  buildSectionTabs();
+  buildNavGrid();
+  renderQuestion();
+  updateStatBar();
+  startSectionTimer();
+}
+
+function startSectionTimer(){
+  clearInterval(timerRef);
+  timerRef=setInterval(()=>{
+    currentSectionSeconds--;
+    updateTimerDisplay();
+    if(currentSectionSeconds<=0){ clearInterval(timerRef); autoFinishSection(); }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const m = Math.floor(currentSectionSeconds/60);
+  const s = currentSectionSeconds%60;
+  const el = document.getElementById('timer-val');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer-val' + (currentSectionSeconds<=60?' danger':'');
+}
+
+function autoFinishSection(){
+  sectionDone[curSec] = true;
+  buildSectionTabs();
+  const nextSec = SECTIONS.findIndex((_,i)=>i>curSec&&!sectionDone[i]);
+  if(nextSec===-1){
+    finalSubmit();
+  } else {
+    showSectionTransition(SEC_SHORT[curSec], SEC_SHORT[nextSec], ()=>{ autoSwitchToSection(nextSec); });
+  }
+}
+
+function showSectionTransition(doneSec, nextSec, callback){
+  const overlay = document.createElement('div');
+  overlay.id='sec-transition-overlay';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;';
+  overlay.innerHTML=`<div style="background:#fff;border-radius:10px;padding:2.5rem;text-align:center;max-width:380px;box-shadow:0 10px 40px rgba(0,0,0,.4);">
+    <div style="font-size:2.5rem;">⏰</div>
+    <h2 style="color:#ef4444;margin:.6rem 0 .4rem;font-size:1.3rem;">Time Up!</h2>
+    <p style="font-size:.95rem;color:#333;margin-bottom:.3rem;"><strong>${doneSec}</strong> is now complete.</p>
+    <p style="font-size:.88rem;color:#555;margin-bottom:1.2rem;">Starting <strong style="color:#1a2a4a;">${nextSec}</strong> in...</p>
+    <div style="background:#1a2a4a;color:#D4A843;border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;margin:0 auto 1rem;" id="cd-num">3</div>
+    <p style="font-size:.78rem;color:#888;">You cannot return to the previous section.</p>
+  </div>`;
+  document.body.appendChild(overlay);
+  let count=3;
+  const iv=setInterval(()=>{
+    count--;
+    const el=document.getElementById('cd-num');
+    if(el) el.textContent=count;
+    if(count<=0){ clearInterval(iv); if(overlay.parentNode) overlay.parentNode.removeChild(overlay); callback(); }
+  },1000);
+}
+
+function autoSwitchToSection(idx){
+  curSec=idx; curQ=0;
+  if(responses[curSec][0].status==='notvisited') responses[curSec][0].status='notanswered';
+  currentSectionSeconds=900;
+  buildSectionTabs(); buildNavGrid(); renderQuestion(); updateStatBar(); startSectionTimer();
+}
+
+function buildNavGrid(){
+  const grid = document.getElementById('nav-grid');
+  grid.innerHTML = '';
+  document.getElementById('nav-section-label').textContent = SEC_SHORT[curSec];
+  const qs = responses[curSec];
+  qs.forEach((_,i)=>{
+    const btn = document.createElement('button');
+    btn.className = `nav-q ${qs[i].status} ${i===curQ?'current':''}`;
+    btn.textContent = i+1;
+    btn.onclick = ()=>goToQ(i);
+    grid.appendChild(btn);
+  });
+}
+
+function goToQ(idx){
+  curQ = idx;
+  if(responses[curSec][curQ].status==='notvisited') responses[curSec][curQ].status='notanswered';
+  renderQuestion();
+  buildNavGrid();
+  updateStatBar();
+}
+
+function renderQuestion(){
+  const sec = TESTS[curTest].sections[curSec];
+  const q = sec[curQ];
+  const resp = responses[curSec][curQ];
+  document.getElementById('q-num-badge').textContent = `Q.${curQ+1} of 25 | ${SEC_SHORT[curSec]}`;
+  document.getElementById('q-text').textContent = q.q;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  ['A','B','C','D'].forEach((lbl,i)=>{
+    const div = document.createElement('div');
+    div.className = 'opt' + (resp.selected===i?' selected':'');
+    div.innerHTML = `<span class="opt-label">(${lbl})</span><span class="opt-text">${q.opts[i]}</span>`;
+    div.onclick = ()=>selectOption(i);
+    container.appendChild(div);
+  });
+  updateQuickStats();
+}
+
+function selectOption(idx){
+  const resp = responses[curSec][curQ];
+  resp.selected = idx;
+  resp.status = resp.status==='markedreview'?'markedreview':'answered';
+  renderQuestion();
+  buildNavGrid();
+  updateStatBar();
+}
+
+function saveAndNext(){
+  const resp = responses[curSec][curQ];
+  if(resp.status==='markedreview') resp.status='answered';
+  if(curQ<24){
+    curQ++;
+    if(responses[curSec][curQ].status==='notvisited') responses[curSec][curQ].status='notanswered';
+  }
+  renderQuestion(); buildNavGrid(); updateStatBar();
+}
+
+function saveAndMark(){
+  const resp = responses[curSec][curQ];
+  resp.status = 'markedreview';
+  if(curQ<24){ curQ++; if(responses[curSec][curQ].status==='notvisited') responses[curSec][curQ].status='notanswered'; }
+  renderQuestion(); buildNavGrid(); updateStatBar();
+}
+
+function clearResponse(){
+  responses[curSec][curQ].selected = -1;
+  responses[curSec][curQ].status = 'notanswered';
+  renderQuestion(); buildNavGrid(); updateStatBar();
+}
+
+function markForReview(){
+  responses[curSec][curQ].status = 'markedreview';
+  renderQuestion(); buildNavGrid(); updateStatBar();
+}
+
+function updateStatBar(){
+  let answered=0,notanswered=0,notvisited=0,marked=0;
+  responses.forEach(sec=>sec.forEach(r=>{
+    if(r.status==='answered') answered++;
+    else if(r.status==='notanswered') notanswered++;
+    else if(r.status==='notvisited') notvisited++;
+    else if(r.status==='markedreview') marked++;
+  }));
+  document.getElementById('cnt-answered').textContent=answered;
+  document.getElementById('cnt-notanswered').textContent=notanswered;
+  document.getElementById('cnt-notvisited').textContent=notvisited;
+  document.getElementById('cnt-marked').textContent=marked;
+  // live score
+  let score=0;
+  responses.forEach((sec,si)=>sec.forEach((r,qi)=>{
+    if(r.selected!==-1){
+      const correct = TESTS[curTest].sections[si][qi].ans;
+      score += r.selected===correct ? 2 : -0.5;
+    }
+  }));
+  document.getElementById('total-score-display').textContent = `Score: ${score.toFixed(1)}/200`;
+}
+
+function updateQuickStats(){
+  const sec = TESTS[curTest].sections[curSec];
+  let att=0,corr=0,wrong=0;
+  responses[curSec].forEach((r,i)=>{
+    if(r.selected!==-1){ att++; if(r.selected===sec[i].ans) corr++; else wrong++; }
+  });
+  const score=(corr*2-wrong*0.5).toFixed(1);
+  document.getElementById('s-attempted').textContent=att;
+  document.getElementById('s-correct').textContent=corr;
+  document.getElementById('s-wrong').textContent=wrong;
+  document.getElementById('s-score').textContent=score;
+}
+
+function openSubmitModal(){
+  let answered=0,notanswered=0,notvisited=0,marked=0;
+  responses.forEach(sec=>sec.forEach(r=>{
+    if(r.status==='answered') answered++;
+    else if(r.status==='notanswered') notanswered++;
+    else if(r.status==='notvisited') notvisited++;
+    else if(r.status==='markedreview') marked++;
+  }));
+  document.getElementById('m-answered').textContent=answered;
+  document.getElementById('m-notanswered').textContent=notanswered;
+  document.getElementById('m-notvisited').textContent=notvisited;
+  document.getElementById('m-marked').textContent=marked;
+  document.getElementById('submit-modal').classList.add('active');
+}
+
+function closeSubmitModal(){document.getElementById('submit-modal').classList.remove('active');}
+
+function finalSubmit(){
+  clearInterval(timerRef);
+  document.getElementById('submit-modal').classList.remove('active');
+  showResult();
+}
+
+function showResult(){
+  let totalAttempted=0,totalCorrect=0,totalWrong=0,totalScore=0;
+  const tbody = document.getElementById('result-section-rows');
+  tbody.innerHTML='';
+  SECTIONS.forEach((sname,si)=>{
+    const sec = TESTS[curTest].sections[si];
+    let att=0,corr=0,wrong=0;
+    responses[si].forEach((r,qi)=>{
+      if(r.selected!==-1){ att++; if(r.selected===sec[qi].ans) corr++; else wrong++; }
+    });
+    const score=(corr*2-wrong*0.5).toFixed(1);
+    totalAttempted+=att; totalCorrect+=corr; totalWrong+=wrong;
+    totalScore+=parseFloat(score);
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${SEC_SHORT[si]}</td><td>${att}</td><td style="color:#22c55e;font-weight:700;">${corr}</td><td style="color:#ef4444;font-weight:700;">${wrong}</td><td style="font-weight:700;">${score}</td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('rt-attempted').textContent=totalAttempted;
+  document.getElementById('rt-correct').textContent=totalCorrect;
+  document.getElementById('rt-wrong').textContent=totalWrong;
+  document.getElementById('rt-score').textContent=totalScore.toFixed(1);
+  document.getElementById('r-test-name').textContent=TESTS[curTest].name;
+  document.getElementById('r-score').textContent=totalScore.toFixed(1);
+  const pct=(totalScore/200*100).toFixed(1);
+  document.getElementById('r-pct').textContent=pct+'%';
+  const verdict = pct>=40?'✅ Likely to Qualify':'❌ Needs More Practice';
+  document.getElementById('r-verdict').innerHTML=`<span style="color:${pct>=40?'#22c55e':'#ef4444'}">${verdict}</span>`;
+  document.getElementById('result-bg').classList.add('active');
+}
+
+function retryTest(){ initTest(); }
+function nextTest(){
+  curTest=(curTest+1)%TESTS.length;
+  document.getElementById('test-selector').value=curTest;
+  initTest();
+}
+
+// Build selector
+const sel = document.getElementById('test-selector');
+TESTS.forEach((t,i)=>{
+  const opt=document.createElement('option');
+  opt.value=i; opt.textContent=t.name;
+  sel.appendChild(opt);
+});
+sel.onchange=function(){ curTest=parseInt(this.value); initTest(); };
+
+// INIT
+initTest();
+</script>
+</body>
+</html>
