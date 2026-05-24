@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     :root {
       --gold: #D4A843;
       --gold-light: #F0C96B;
@@ -18,16 +18,16 @@
       --text-muted: #9DAEC6;
       --accent: #E8734A;
     }
- 
+
     html { scroll-behavior: smooth; }
- 
+
     body {
       font-family: 'DM Sans', sans-serif;
       background-color: var(--navy);
       color: var(--white);
       overflow-x: hidden;
     }
- 
+
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -39,9 +39,9 @@
       animation: slideDown .6s ease both;
       flex-wrap: wrap; gap: .5rem;
     }
- 
+
     @keyframes slideDown { from { transform: translateY(-60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
- 
+
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem; font-weight: 900;
@@ -50,11 +50,11 @@
       line-height: 1.1;
     }
     .logo span { display: block; font-size: .65rem; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--text-muted); letter-spacing: .22em; text-transform: uppercase; }
- 
+
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--white); font-size: .88rem; font-weight: 400; letter-spacing: .06em; transition: color .25s; }
     .nav-links a:hover { color: var(--gold); }
- 
+
     .nav-cta {
       background: var(--gold); color: var(--navy);
       padding: .55rem 1.4rem; border-radius: 2rem;
@@ -63,7 +63,7 @@
     }
     .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
     .nav-buttons { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
- 
+
     /* HERO */
     .hero {
       min-height: 100vh;
@@ -72,13 +72,13 @@
       padding: 7rem 5% 4rem;
       position: relative; overflow: hidden;
     }
- 
+
     .hero-bg {
       position: absolute; inset: 0;
       background: radial-gradient(ellipse 80% 60% at 50% 30%, #1a3a6a55 0%, transparent 70%),
                   radial-gradient(ellipse 40% 40% at 80% 80%, #d4a84322 0%, transparent 60%);
     }
- 
+
     .hero-bg::before {
       content: '';
       position: absolute; inset: 0;
@@ -87,7 +87,7 @@
       animation: bgPan 30s linear infinite;
     }
     @keyframes bgPan { from { background-position: 0 0; } to { background-position: 48px 48px; } }
- 
+
     .badge {
       display: inline-block;
       border: 1px solid var(--gold);
@@ -97,7 +97,7 @@
       margin-bottom: 1.8rem;
       animation: fadeUp .7s .2s ease both;
     }
- 
+
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.8rem, 7vw, 5.5rem);
@@ -106,7 +106,7 @@
       max-width: 860px;
       animation: fadeUp .7s .35s ease both;
     }
- 
+
     .hero h1 em {
       font-style: normal; color: var(--gold);
       position: relative; white-space: nowrap;
@@ -117,18 +117,18 @@
       background: linear-gradient(90deg, var(--gold), var(--accent));
       border-radius: 2px;
     }
- 
+
     .hero p {
       margin-top: 1.6rem; max-width: 580px;
       font-size: 1.05rem; font-weight: 300; color: var(--text-muted); line-height: 1.75;
       animation: fadeUp .7s .5s ease both;
     }
- 
+
     .hero-actions {
       margin-top: 2.6rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
       animation: fadeUp .7s .65s ease both;
     }
- 
+
     .btn-primary {
       background: linear-gradient(135deg, var(--gold), var(--accent));
       color: var(--navy); padding: .85rem 2.2rem;
@@ -137,16 +137,16 @@
       box-shadow: 0 6px 28px rgba(212,168,67,0.35);
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(212,168,67,0.45); }
- 
+
     .btn-outline {
       border: 1.5px solid rgba(212,168,67,0.5); color: var(--gold);
       padding: .85rem 2.2rem; border-radius: 3rem; font-size: .95rem;
       text-decoration: none; transition: background .25s, border-color .25s;
     }
     .btn-outline:hover { background: rgba(212,168,67,0.08); border-color: var(--gold); }
- 
+
     @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
- 
+
     /* STATS */
     .stats {
       background: var(--navy-mid);
@@ -154,7 +154,7 @@
       border-bottom: 1px solid rgba(212,168,67,.12);
       display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
     }
- 
+
     .stat-item {
       flex: 1; min-width: 180px;
       padding: 2.5rem 2rem; text-align: center;
@@ -163,42 +163,42 @@
     }
     .stat-item:last-child { border-right: none; }
     .stat-item:hover { background: rgba(212,168,67,.04); }
- 
+
     .stat-item strong {
       display: block; font-family: 'Playfair Display', serif;
       font-size: 2.6rem; font-weight: 900; color: var(--gold);
     }
     .stat-item span { font-size: .82rem; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-top: .3rem; display: block; }
- 
+
     /* SECTIONS */
     section { padding: 6rem 5%; }
- 
+
     .section-label {
       font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
       color: var(--gold); margin-bottom: .9rem; display: block;
     }
- 
+
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
       line-height: 1.2; margin-bottom: 1.2rem;
     }
- 
+
     .section-sub { color: var(--text-muted); max-width: 560px; line-height: 1.75; font-weight: 300; }
- 
+
     /* COURSES / EXAMS */
     #exams { background: var(--navy); }
- 
+
     .course-header { text-align: center; margin-bottom: 3.5rem; }
     .course-header .section-sub { margin: 0 auto; }
- 
+
     .courses-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       max-width: 1100px; margin: 0 auto;
     }
- 
+
     .course-card {
       background: var(--navy-mid);
       border: 1px solid rgba(212,168,67,.12);
@@ -215,23 +215,23 @@
     }
     .course-card:hover { transform: translateY(-6px); border-color: rgba(212,168,67,.3); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
     .course-card:hover::before { transform: scaleX(1); }
- 
+
     .course-icon {
       width: 52px; height: 52px; border-radius: .8rem;
       background: rgba(212,168,67,.12);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.6rem; margin-bottom: 1.3rem;
     }
- 
+
     .course-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: .6rem; }
     .course-card p { color: var(--text-muted); font-size: .88rem; line-height: 1.7; font-weight: 300; }
- 
+
     .course-tag {
       display: inline-block; margin-top: 1.2rem;
       background: rgba(212,168,67,.1); color: var(--gold);
       font-size: .72rem; padding: .3rem .8rem; border-radius: 2rem; letter-spacing: .08em;
     }
- 
+
     /* FEATURES */
     #features { background: var(--navy); }
     .features-grid {
@@ -250,24 +250,24 @@
     .feature-card .ficon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
     .feature-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: .6rem; }
     .feature-card p { color: var(--text-muted); font-size: .85rem; line-height: 1.7; font-weight: 300; }
- 
+
     /* WHY US */
     #why {
       background: var(--navy-mid);
       display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
     }
- 
+
     .why-visual {
       position: relative; border-radius: 1.5rem; overflow: hidden;
       background: linear-gradient(135deg, var(--navy-light), var(--navy));
       border: 1px solid rgba(212,168,67,.15);
       padding: 3rem;
     }
- 
+
     .why-visual-inner {
       display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
     }
- 
+
     .why-stat-box {
       background: rgba(212,168,67,.07);
       border: 1px solid rgba(212,168,67,.12);
@@ -279,7 +279,7 @@
       font-size: 2rem; font-weight: 900; color: var(--gold);
     }
     .why-stat-box .lbl { font-size: .75rem; color: var(--text-muted); margin-top: .3rem; }
- 
+
     .why-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1.1rem; }
     .why-list li {
       display: flex; align-items: flex-start; gap: 1rem;
@@ -289,7 +289,7 @@
       content: '✦'; color: var(--gold); font-size: .8rem;
       margin-top: .15rem; flex-shrink: 0;
     }
- 
+
     /* FACULTY */
     #faculty { background: var(--navy); }
     .faculty-grid {
@@ -323,16 +323,16 @@
       text-decoration: none; transition: transform .2s;
     }
     .faculty-btn:hover { transform: translateY(-2px); }
- 
+
     /* TESTIMONIALS */
     #testimonials { background: var(--navy-mid); text-align: center; }
     .test-header { margin-bottom: 3.5rem; }
- 
+
     .test-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem; max-width: 1000px; margin: 0 auto;
     }
- 
+
     .test-card {
       background: var(--navy);
       border: 1px solid rgba(212,168,67,.1);
@@ -340,10 +340,10 @@
       text-align: left; transition: transform .25s;
     }
     .test-card:hover { transform: translateY(-4px); }
- 
+
     .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: .1em; }
     .test-card blockquote { font-size: .9rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; font-style: italic; margin-bottom: 1.4rem; }
- 
+
     .test-author { display: flex; align-items: center; gap: .9rem; }
     .avatar {
       width: 42px; height: 42px; border-radius: 50%;
@@ -353,7 +353,7 @@
     }
     .test-author strong { font-size: .9rem; display: block; }
     .test-author span { font-size: .78rem; color: var(--text-muted); }
- 
+
     /* CTA BAND */
     .cta-band {
       background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-mid) 100%);
@@ -367,33 +367,33 @@
       margin-bottom: 1rem;
     }
     .cta-band p { color: var(--text-muted); max-width: 500px; margin: 0 auto 2.4rem; font-weight: 300; line-height: 1.75; }
- 
+
     /* FOOTER */
     footer {
       background: #060f1c;
       padding: 3.5rem 5% 2rem;
       border-top: 1px solid rgba(212,168,67,.08);
     }
- 
+
     .footer-grid {
       display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
       gap: 2.5rem; margin-bottom: 3rem;
     }
- 
+
     .footer-brand .logo { font-size: 1.1rem; margin-bottom: .8rem; }
     .footer-brand p { color: var(--text-muted); font-size: .85rem; line-height: 1.75; font-weight: 300; max-width: 240px; }
- 
+
     .footer-col h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .16em; color: var(--gold); margin-bottom: 1.1rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
     .footer-col ul a { color: var(--text-muted); font-size: .85rem; text-decoration: none; transition: color .2s; }
     .footer-col ul a:hover { color: var(--white); }
- 
+
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,.06);
       padding-top: 1.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
       font-size: .78rem; color: var(--text-muted);
     }
- 
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       #why { grid-template-columns: 1fr; }
@@ -407,7 +407,7 @@
   </style>
 </head>
 <body>
- 
+
 <!-- NAV -->
 <nav>
   <div class="logo">
@@ -427,7 +427,7 @@
     <a href="ssc-cgl-mock.html" target="_blank" class="nav-cta" style="background:#122240;color:#D4A843;">📝 Mock Test</a>
   </div>
 </nav>
- 
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -443,7 +443,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- STATS -->
 <div class="stats">
   <div class="stat-item"><strong>15,000+</strong><span>Students Selected</span></div>
@@ -451,7 +451,7 @@
   <div class="stat-item"><strong>30+</strong><span>Mock Tests Available</span></div>
   <div class="stat-item"><strong>500+</strong><span>Study Materials</span></div>
 </div>
- 
+
 <!-- SSC EXAMS -->
 <section id="exams">
   <div class="course-header">
@@ -498,7 +498,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- FEATURES -->
 <section id="features" style="background:var(--navy-mid);padding:6rem 5%;text-align:center;">
   <span class="section-label">What You Get</span>
@@ -527,7 +527,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- WHY US -->
 <section id="why">
   <div class="why-visual">
@@ -551,7 +551,7 @@
     </ul>
   </div>
 </section>
- 
+
 <!-- FACULTY -->
 <section id="faculty">
   <div style="text-align:center;margin-bottom:3rem;">
@@ -569,7 +569,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="test-header">
@@ -603,14 +603,14 @@
     </div>
   </div>
 </section>
- 
+
 <!-- CTA BAND -->
 <div class="cta-band" id="contact">
   <h2>Your SSC Selection Starts Here</h2>
   <p>Join thousands of students who trusted Vampristra and got selected in SSC CGL, CHSL, CPO, MTS and GD.</p>
   <a href="https://wa.me/919135719054" target="_blank" class="btn-primary">💬 Enroll on WhatsApp</a>
 </div>
- 
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -654,16 +654,388 @@
     <span>Privacy Policy · Terms of Use</span>
   </div>
 </footer>
-  <script>
-// Embed chatbot
+
+<!-- ── VAMPRISTRA AI CHATBOT ── -->
+<style>
+#vamp-chat-toggle{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#D4A843,#E8734A);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 28px rgba(212,168,67,.5);
+  transition:transform .25s;
+  -webkit-tap-highlight-color:transparent;
+}
+#vamp-chat-toggle:hover,#vamp-chat-toggle:active{transform:scale(1.1);}
+#vamp-chat-toggle svg{width:26px;height:26px;fill:#0B1A2E;pointer-events:none;}
+#vamp-chat-badge{
+  position:absolute;top:-3px;right:-3px;
+  background:#ef4444;color:#fff;
+  font-size:.58rem;font-weight:700;
+  width:17px;height:17px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid #0B1A2E;pointer-events:none;
+}
+
+#vamp-chat-window{
+  position:fixed;
+  bottom:5rem;right:1rem;
+  z-index:9998;
+  width:360px;
+  max-width:calc(100vw - 1.5rem);
+  height:520px;
+  max-height:calc(100vh - 7rem);
+  background:#122240;
+  border:1px solid rgba(212,168,67,.2);
+  border-radius:1.2rem;
+  display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  transform:translateY(20px) scale(.95);
+  opacity:0;pointer-events:none;
+  transition:all .28s cubic-bezier(.34,1.4,.64,1);
+  overflow:hidden;
+}
+#vamp-chat-window.vc-open{
+  transform:translateY(0) scale(1);
+  opacity:1;pointer-events:all;
+}
+
+/* on small screens go fullscreen */
+@media(max-width:480px){
+  #vamp-chat-window.vc-open{
+    bottom:0;right:0;left:0;
+    width:100%;max-width:100%;
+    height:100vh;max-height:100vh;
+    border-radius:0;
+  }
+  #vamp-chat-toggle{bottom:1rem;right:1rem;}
+}
+
+.vc-head{
+  background:linear-gradient(135deg,#1A3258,#0B1A2E);
+  border-bottom:1px solid rgba(212,168,67,.15);
+  padding:.8rem 1rem;
+  display:flex;align-items:center;gap:.75rem;flex-shrink:0;
+}
+.vc-avatar{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#D4A843,#E8734A);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.vc-head-info{flex:1;min-width:0;}
+.vc-head-info strong{display:block;font-size:.88rem;color:#F8F5EE;font-family:'DM Sans',sans-serif;}
+.vc-head-info span{font-size:.68rem;color:#22c55e;display:flex;align-items:center;gap:.3rem;}
+.vc-head-info span::before{content:'';width:6px;height:6px;background:#22c55e;border-radius:50%;display:inline-block;animation:vcblink 1.5s infinite;}
+@keyframes vcblink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.vc-head-btns{display:flex;gap:.4rem;align-items:center;}
+.vc-btn-sm{background:none;border:1px solid rgba(255,255,255,.15);color:#9DAEC6;font-size:.68rem;padding:.2rem .55rem;border-radius:2rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.vc-btn-close{background:none;border:none;color:#9DAEC6;font-size:1.3rem;cursor:pointer;padding:.1rem .3rem;-webkit-tap-highlight-color:transparent;line-height:1;}
+.vc-btn-sm:hover,.vc-btn-close:hover{color:#F8F5EE;}
+
+#vc-messages{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:.85rem;
+  display:flex;flex-direction:column;gap:.7rem;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+}
+#vc-messages::-webkit-scrollbar{width:3px;}
+#vc-messages::-webkit-scrollbar-thumb{background:rgba(212,168,67,.2);border-radius:2px;}
+
+.vc-welcome{
+  background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(232,115,74,.05));
+  border:1px solid rgba(212,168,67,.15);border-radius:.9rem;
+  padding:1rem;
+}
+.vc-welcome h4{font-family:'Playfair Display',serif;color:#D4A843;font-size:.95rem;margin-bottom:.4rem;}
+.vc-welcome p{font-size:.78rem;color:#9DAEC6;line-height:1.6;}
+.vc-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem;}
+.vc-pill{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);color:#D4A843;font-size:.68rem;padding:.22rem .6rem;border-radius:2rem;}
+
+.vc-msg{display:flex;gap:.5rem;animation:vcMsgIn .25s ease both;}
+@keyframes vcMsgIn{from{transform:translateY(8px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.vc-msg.vc-user{flex-direction:row-reverse;}
+.vc-msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-top:2px;}
+.vc-msg.vc-bot .vc-msg-av{background:linear-gradient(135deg,#D4A843,#E8734A);}
+.vc-msg.vc-user .vc-msg-av{background:linear-gradient(135deg,#1A3258,#2a4a8a);}
+.vc-bubble{max-width:84%;padding:.65rem .9rem;border-radius:.9rem;font-size:.838rem;line-height:1.65;word-break:break-word;}
+.vc-msg.vc-bot .vc-bubble{background:#1A3258;border:1px solid rgba(212,168,67,.1);border-bottom-left-radius:.25rem;color:#F8F5EE;}
+.vc-msg.vc-user .vc-bubble{background:linear-gradient(135deg,#D4A843,#E8734A);color:#0B1A2E;font-weight:500;border-bottom-right-radius:.25rem;}
+.vc-time{font-size:.62rem;color:#9DAEC6;margin-top:.25rem;}
+.vc-msg.vc-user .vc-time{text-align:right;}
+.vc-bubble b{color:#F0C96B;}
+.vc-bubble br{display:block;content:'';margin:.15rem 0;}
+
+.vc-typing{display:flex;gap:4px;align-items:center;padding:.5rem .2rem;}
+.vc-typing span{width:7px;height:7px;background:#D4A843;border-radius:50%;animation:vcBounce 1.2s infinite;}
+.vc-typing span:nth-child(2){animation-delay:.2s;}
+.vc-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes vcBounce{0%,80%,100%{transform:scale(.75);opacity:.5;}40%{transform:scale(1.15);opacity:1;}}
+
+.vc-chips{
+  padding:.5rem .85rem;display:flex;gap:.4rem;flex-wrap:wrap;flex-shrink:0;
+  border-top:1px solid rgba(212,168,67,.07);
+}
+.vc-chip{
+  background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.18);
+  color:#D4A843;font-size:.7rem;padding:.28rem .7rem;border-radius:2rem;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:background .18s;white-space:nowrap;
+}
+.vc-chip:hover,.vc-chip:active{background:rgba(212,168,67,.18);}
+
+.vc-input-row{
+  padding:.7rem .85rem;border-top:1px solid rgba(212,168,67,.1);
+  display:flex;gap:.55rem;align-items:flex-end;flex-shrink:0;
+  background:#0B1A2E;
+}
+#vc-input{
+  flex:1;background:#122240;border:1.5px solid rgba(212,168,67,.2);
+  color:#F8F5EE;border-radius:.75rem;padding:.6rem .85rem;
+  font-family:'DM Sans',sans-serif;font-size:.875rem;
+  resize:none;outline:none;
+  max-height:100px;min-height:38px;line-height:1.5;
+  -webkit-appearance:none;
+  transition:border-color .2s;
+}
+#vc-input::placeholder{color:#9DAEC6;}
+#vc-input:focus{border-color:rgba(212,168,67,.5);}
+#vc-send{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#D4A843,#E8734A);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .2s,opacity .2s;
+}
+#vc-send:hover,#vc-send:active{transform:scale(1.08);}
+#vc-send:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+#vc-send svg{width:17px;height:17px;fill:#0B1A2E;pointer-events:none;}
+.vc-disc{font-size:.64rem;color:#9DAEC6;text-align:center;padding:.3rem .85rem .5rem;opacity:.65;flex-shrink:0;}
+</style>
+
+<!-- Toggle Button -->
+<button id="vamp-chat-toggle" onclick="vcToggle()" aria-label="Open AI Chat">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  <div id="vamp-chat-badge">1</div>
+</button>
+
+<!-- Chat Window -->
+<div id="vamp-chat-window">
+  <div class="vc-head">
+    <div class="vc-avatar">🎓</div>
+    <div class="vc-head-info">
+      <strong>Vampristra AI</strong>
+      <span>Online · SSC Expert</span>
+    </div>
+    <div class="vc-head-btns">
+      <button class="vc-btn-sm" onclick="vcClear()">Clear</button>
+      <button class="vc-btn-close" onclick="vcToggle()">✕</button>
+    </div>
+  </div>
+
+  <div id="vc-messages">
+    <div class="vc-welcome">
+      <h4>👋 Namaste! I am Vampristra AI</h4>
+      <p>Your personal SSC assistant. Ask me anything about SSC CGL, CHSL, CPO, MTS, GD — syllabus, maths tricks, GA facts, strategy and more!</p>
+      <div class="vc-pills">
+        <span class="vc-pill">SSC CGL 2026</span>
+        <span class="vc-pill">Maths Tricks</span>
+        <span class="vc-pill">GA Topics</span>
+        <span class="vc-pill">Exam Strategy</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vc-chips" id="vc-chips">
+    <span class="vc-chip" onclick="vcChip(this)">CGL 2026 syllabus</span>
+    <span class="vc-chip" onclick="vcChip(this)">Maths shortcuts</span>
+    <span class="vc-chip" onclick="vcChip(this)">Important GA topics</span>
+    <span class="vc-chip" onclick="vcChip(this)">3 month study plan</span>
+  </div>
+
+  <div class="vc-input-row">
+    <textarea id="vc-input"
+      placeholder="Ask anything about SSC..."
+      rows="1"
+      onkeydown="vcKey(event)"
+      oninput="vcResize(this)"></textarea>
+    <button id="vc-send" onclick="vcSend()" aria-label="Send">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+  <div class="vc-disc">Powered by Claude AI · Vampristra The Toppers Way</div>
+</div>
+
+<script>
 (function(){
-  const iframe = document.createElement('iframe');
-  iframe.src = 'chatbot.html';
-  iframe.style.cssText = 'position:fixed;bottom:0;right:0;width:420px;height:100vh;border:none;z-index:9999;pointer-events:none;';
-  iframe.id = 'vampristra-chatbot';
-  document.body.appendChild(iframe);
+  let vcOpen = false;
+  let vcLoading = false;
+  const vcHistory = [];
+
+  const VC_SYSTEM = `You are Vampristra AI, the official assistant for Vampristra - The Toppers Way, a premier SSC coaching institute in Ratanpura, Motipur, Bihar, India, founded by Sumit Sir (contact: +91 91357 19054).
+
+Help SSC aspirants with:
+1. SSC EXAMS: CGL, CHSL, CPO, MTS, GD - syllabus, pattern, eligibility, selection process, exam dates
+2. SUBJECTS:
+   - Quantitative Aptitude: step-by-step solutions, shortcuts for percentage, ratio, SI/CI, time-work, speed-distance, geometry, trigonometry
+   - Reasoning: coding-decoding, series, analogies, syllogisms, blood relations, direction sense, puzzles
+   - English: grammar rules, vocabulary, idioms, error spotting, comprehension tips, one-word substitution
+   - General Awareness: history, geography, polity, science, economy, current affairs for SSC
+3. STRATEGY: Study plans, time management, section-wise approach, how to handle negative marking
+4. VAMPRISTRA: Guide to use the free DEST typing test and 30 CGL Mock Tests on this website
+5. MOTIVATION: Encourage students, especially from small towns
+
+RULES:
+- Answer in simple clear English
+- For maths, show step-by-step with shortcuts
+- Use bullet points for clarity
+- Keep responses helpful and concise
+- Be warm and encouraging
+- Mention Vampristra mock tests and DEST practice when relevant
+- For enrollment: WhatsApp Sumit Sir at +91 91357 19054`;
+
+  window.vcToggle = function(){
+    vcOpen = !vcOpen;
+    document.getElementById('vamp-chat-window').classList.toggle('vc-open', vcOpen);
+    document.getElementById('vamp-chat-badge').style.display = vcOpen ? 'none' : 'flex';
+    if(vcOpen){
+      // Small delay so keyboard doesn't immediately pop up and cover chat on mobile
+      setTimeout(()=>{ document.getElementById('vc-input').focus(); }, 300);
+    }
+  };
+
+  window.vcClear = function(){
+    vcHistory.length = 0;
+    document.getElementById('vc-messages').innerHTML = `
+      <div class="vc-welcome">
+        <h4>Chat cleared! How can I help?</h4>
+        <p>Ask me anything about SSC CGL, CHSL, CPO, MTS or GD exams!</p>
+      </div>`;
+    document.getElementById('vc-chips').style.display = 'flex';
+  };
+
+  window.vcChip = function(el){
+    document.getElementById('vc-input').value = el.textContent;
+    vcSend();
+  };
+
+  window.vcKey = function(e){
+    if(e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      vcSend();
+    }
+  };
+
+  window.vcResize = function(el){
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+  };
+
+  function vcTime(){
+    return new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  function vcFormat(txt){
+    return txt
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')
+      .replace(/\*(.*?)\*/g,'<em>$1</em>')
+      .replace(/`(.*?)`/g,'<code style="background:rgba(212,168,67,.12);padding:.1rem .3rem;border-radius:.2rem;font-size:.8rem;">$1</code>')
+      .replace(/^#{1,3} (.+)$/gm,'<b style="color:#F0C96B;font-size:.92rem;">$1</b>')
+      .replace(/^\- (.+)$/gm,'• $1')
+      .replace(/\n/g,'<br/>');
+  }
+
+  function vcAppend(role, text){
+    const msgs = document.getElementById('vc-messages');
+    const d = document.createElement('div');
+    d.className = `vc-msg ${role==='bot'?'vc-bot':'vc-user'}`;
+    const av = role==='bot' ? '🎓' : '👤';
+    d.innerHTML = `
+      <div class="vc-msg-av">${av}</div>
+      <div>
+        <div class="vc-bubble">${vcFormat(text)}</div>
+        <div class="vc-time">${vcTime()}</div>
+      </div>`;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function vcShowTyping(){
+    const msgs = document.getElementById('vc-messages');
+    const d = document.createElement('div');
+    d.className = 'vc-msg vc-bot'; d.id = 'vc-typing';
+    d.innerHTML = `<div class="vc-msg-av">🎓</div>
+      <div class="vc-bubble" style="padding:.5rem .85rem;">
+        <div class="vc-typing"><span></span><span></span><span></span></div>
+      </div>`;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function vcRemoveTyping(){
+    const el = document.getElementById('vc-typing');
+    if(el) el.remove();
+  }
+
+  window.vcSend = async function(){
+    const inp = document.getElementById('vc-input');
+    const text = inp.value.trim();
+    if(!text || vcLoading) return;
+
+    inp.value = '';
+    inp.style.height = 'auto';
+    document.getElementById('vc-chips').style.display = 'none';
+    document.getElementById('vamp-chat-badge').style.display = 'none';
+
+    vcAppend('user', text);
+    vcHistory.push({role:'user', content:text});
+
+    vcLoading = true;
+    document.getElementById('vc-send').disabled = true;
+    vcShowTyping();
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:800,
+          system:VC_SYSTEM,
+          messages:vcHistory
+        })
+      });
+      const data = await res.json();
+      if(data.error) throw new Error(data.error.message);
+
+      const reply = data.content.filter(b=>b.type==='text').map(b=>b.text).join('');
+      vcHistory.push({role:'assistant', content:reply});
+      if(vcHistory.length > 20) vcHistory.splice(0,2);
+
+      vcRemoveTyping();
+      vcAppend('bot', reply);
+    } catch(err){
+      vcRemoveTyping();
+      vcAppend('bot','Sorry, I could not connect right now. Please try again!\n\nFor help, WhatsApp **Sumit Sir** at **+91 91357 19054**');
+    } finally {
+      vcLoading = false;
+      document.getElementById('vc-send').disabled = false;
+    }
+  };
+
+  // Auto open after 4 seconds
+  setTimeout(()=>{
+    if(!vcOpen){
+      vcToggle();
+      setTimeout(()=>{
+        vcAppend('bot','**Namaste! 👋 Welcome to Vampristra!**\n\nI am your personal SSC AI assistant. Ask me about:\n\n• **SSC CGL, CHSL, CPO, MTS, GD** syllabus and strategy\n• **Maths shortcuts** and solved examples\n• **General Awareness** and current affairs\n• **Study plans** and time management\n\nWhat would you like to know?');
+      }, 350);
+    }
+  }, 4000);
 })();
 </script>
- 
+
 </body>
 </html>
