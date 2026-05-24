@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VAMPRISTRA – The Toppers' Way</title>
+  <title>VAMPRISTRA – The Toppers' Way | SSC Coaching</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --gold: #D4A843;
       --gold-light: #F0C96B;
@@ -18,17 +18,17 @@
       --text-muted: #9DAEC6;
       --accent: #E8734A;
     }
-
+ 
     html { scroll-behavior: smooth; }
-
+ 
     body {
       font-family: 'DM Sans', sans-serif;
       background-color: var(--navy);
       color: var(--white);
       overflow-x: hidden;
     }
-
-    /* ── NAV ── */
+ 
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -37,10 +37,11 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(212,168,67,0.15);
       animation: slideDown .6s ease both;
+      flex-wrap: wrap; gap: .5rem;
     }
-
+ 
     @keyframes slideDown { from { transform: translateY(-60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
+ 
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem; font-weight: 900;
@@ -49,11 +50,11 @@
       line-height: 1.1;
     }
     .logo span { display: block; font-size: .65rem; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--text-muted); letter-spacing: .22em; text-transform: uppercase; }
-
-    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+ 
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--white); font-size: .88rem; font-weight: 400; letter-spacing: .06em; transition: color .25s; }
     .nav-links a:hover { color: var(--gold); }
-
+ 
     .nav-cta {
       background: var(--gold); color: var(--navy);
       padding: .55rem 1.4rem; border-radius: 2rem;
@@ -61,8 +62,9 @@
       transition: background .25s, transform .2s;
     }
     .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-
-    /* ── HERO ── */
+    .nav-buttons { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+ 
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -70,14 +72,13 @@
       padding: 7rem 5% 4rem;
       position: relative; overflow: hidden;
     }
-
+ 
     .hero-bg {
       position: absolute; inset: 0;
       background: radial-gradient(ellipse 80% 60% at 50% 30%, #1a3a6a55 0%, transparent 70%),
                   radial-gradient(ellipse 40% 40% at 80% 80%, #d4a84322 0%, transparent 60%);
     }
-
-    /* floating dots */
+ 
     .hero-bg::before {
       content: '';
       position: absolute; inset: 0;
@@ -86,7 +87,7 @@
       animation: bgPan 30s linear infinite;
     }
     @keyframes bgPan { from { background-position: 0 0; } to { background-position: 48px 48px; } }
-
+ 
     .badge {
       display: inline-block;
       border: 1px solid var(--gold);
@@ -96,7 +97,7 @@
       margin-bottom: 1.8rem;
       animation: fadeUp .7s .2s ease both;
     }
-
+ 
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.8rem, 7vw, 5.5rem);
@@ -105,7 +106,7 @@
       max-width: 860px;
       animation: fadeUp .7s .35s ease both;
     }
-
+ 
     .hero h1 em {
       font-style: normal; color: var(--gold);
       position: relative; white-space: nowrap;
@@ -116,18 +117,18 @@
       background: linear-gradient(90deg, var(--gold), var(--accent));
       border-radius: 2px;
     }
-
+ 
     .hero p {
       margin-top: 1.6rem; max-width: 580px;
       font-size: 1.05rem; font-weight: 300; color: var(--text-muted); line-height: 1.75;
       animation: fadeUp .7s .5s ease both;
     }
-
+ 
     .hero-actions {
       margin-top: 2.6rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
       animation: fadeUp .7s .65s ease both;
     }
-
+ 
     .btn-primary {
       background: linear-gradient(135deg, var(--gold), var(--accent));
       color: var(--navy); padding: .85rem 2.2rem;
@@ -136,24 +137,24 @@
       box-shadow: 0 6px 28px rgba(212,168,67,0.35);
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(212,168,67,0.45); }
-
+ 
     .btn-outline {
       border: 1.5px solid rgba(212,168,67,0.5); color: var(--gold);
       padding: .85rem 2.2rem; border-radius: 3rem; font-size: .95rem;
       text-decoration: none; transition: background .25s, border-color .25s;
     }
     .btn-outline:hover { background: rgba(212,168,67,0.08); border-color: var(--gold); }
-
+ 
     @keyframes fadeUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-    /* ── STATS STRIP ── */
+ 
+    /* STATS */
     .stats {
       background: var(--navy-mid);
       border-top: 1px solid rgba(212,168,67,.12);
       border-bottom: 1px solid rgba(212,168,67,.12);
       display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
     }
-
+ 
     .stat-item {
       flex: 1; min-width: 180px;
       padding: 2.5rem 2rem; text-align: center;
@@ -162,42 +163,42 @@
     }
     .stat-item:last-child { border-right: none; }
     .stat-item:hover { background: rgba(212,168,67,.04); }
-
+ 
     .stat-item strong {
       display: block; font-family: 'Playfair Display', serif;
       font-size: 2.6rem; font-weight: 900; color: var(--gold);
     }
     .stat-item span { font-size: .82rem; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-top: .3rem; display: block; }
-
-    /* ── SECTIONS ── */
+ 
+    /* SECTIONS */
     section { padding: 6rem 5%; }
-
+ 
     .section-label {
       font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
       color: var(--gold); margin-bottom: .9rem; display: block;
     }
-
+ 
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
       line-height: 1.2; margin-bottom: 1.2rem;
     }
-
+ 
     .section-sub { color: var(--text-muted); max-width: 560px; line-height: 1.75; font-weight: 300; }
-
-    /* ── COURSES ── */
-    #courses { background: var(--navy); }
-
+ 
+    /* COURSES / EXAMS */
+    #exams { background: var(--navy); }
+ 
     .course-header { text-align: center; margin-bottom: 3.5rem; }
     .course-header .section-sub { margin: 0 auto; }
-
+ 
     .courses-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       max-width: 1100px; margin: 0 auto;
     }
-
+ 
     .course-card {
       background: var(--navy-mid);
       border: 1px solid rgba(212,168,67,.12);
@@ -214,40 +215,59 @@
     }
     .course-card:hover { transform: translateY(-6px); border-color: rgba(212,168,67,.3); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
     .course-card:hover::before { transform: scaleX(1); }
-
+ 
     .course-icon {
       width: 52px; height: 52px; border-radius: .8rem;
       background: rgba(212,168,67,.12);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.6rem; margin-bottom: 1.3rem;
     }
-
+ 
     .course-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: .6rem; }
     .course-card p { color: var(--text-muted); font-size: .88rem; line-height: 1.7; font-weight: 300; }
-
+ 
     .course-tag {
       display: inline-block; margin-top: 1.2rem;
       background: rgba(212,168,67,.1); color: var(--gold);
       font-size: .72rem; padding: .3rem .8rem; border-radius: 2rem; letter-spacing: .08em;
     }
-
-    /* ── WHY US ── */
+ 
+    /* FEATURES */
+    #features { background: var(--navy); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(212,168,67,.12);
+      border-radius: 1.2rem; padding: 2rem;
+      text-align: center;
+      transition: transform .25s, border-color .25s;
+    }
+    .feature-card:hover { transform: translateY(-4px); border-color: rgba(212,168,67,.3); }
+    .feature-card .ficon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .feature-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: .6rem; }
+    .feature-card p { color: var(--text-muted); font-size: .85rem; line-height: 1.7; font-weight: 300; }
+ 
+    /* WHY US */
     #why {
       background: var(--navy-mid);
       display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
     }
-
+ 
     .why-visual {
       position: relative; border-radius: 1.5rem; overflow: hidden;
       background: linear-gradient(135deg, var(--navy-light), var(--navy));
       border: 1px solid rgba(212,168,67,.15);
       padding: 3rem;
     }
-
+ 
     .why-visual-inner {
       display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
     }
-
+ 
     .why-stat-box {
       background: rgba(212,168,67,.07);
       border: 1px solid rgba(212,168,67,.12);
@@ -259,7 +279,7 @@
       font-size: 2rem; font-weight: 900; color: var(--gold);
     }
     .why-stat-box .lbl { font-size: .75rem; color: var(--text-muted); margin-top: .3rem; }
-
+ 
     .why-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1.1rem; }
     .why-list li {
       display: flex; align-items: flex-start; gap: 1rem;
@@ -269,27 +289,61 @@
       content: '✦'; color: var(--gold); font-size: .8rem;
       margin-top: .15rem; flex-shrink: 0;
     }
-
-    /* ── TESTIMONIALS ── */
-    #testimonials { background: var(--navy); text-align: center; }
+ 
+    /* FACULTY */
+    #faculty { background: var(--navy); }
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; max-width: 700px; margin: 0 auto;
+    }
+    .faculty-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(212,168,67,.15);
+      border-radius: 1.2rem; padding: 2.5rem 2rem;
+      text-align: center;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .faculty-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+    .faculty-avatar {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; margin: 0 auto 1.2rem;
+      border: 3px solid rgba(212,168,67,.3);
+    }
+    .faculty-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: .3rem; }
+    .faculty-card .role { color: var(--gold); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+    .faculty-card p { color: var(--text-muted); font-size: .88rem; line-height: 1.75; font-weight: 300; margin-bottom: 1.2rem; }
+    .faculty-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--accent));
+      color: var(--navy); padding: .6rem 1.5rem;
+      border-radius: 2rem; font-weight: 700; font-size: .85rem;
+      text-decoration: none; transition: transform .2s;
+    }
+    .faculty-btn:hover { transform: translateY(-2px); }
+ 
+    /* TESTIMONIALS */
+    #testimonials { background: var(--navy-mid); text-align: center; }
     .test-header { margin-bottom: 3.5rem; }
-
+ 
     .test-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem; max-width: 1000px; margin: 0 auto;
     }
-
+ 
     .test-card {
-      background: var(--navy-mid);
+      background: var(--navy);
       border: 1px solid rgba(212,168,67,.1);
       border-radius: 1.2rem; padding: 2rem;
       text-align: left; transition: transform .25s;
     }
     .test-card:hover { transform: translateY(-4px); }
-
+ 
     .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: .1em; }
     .test-card blockquote { font-size: .9rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; font-style: italic; margin-bottom: 1.4rem; }
-
+ 
     .test-author { display: flex; align-items: center; gap: .9rem; }
     .avatar {
       width: 42px; height: 42px; border-radius: 50%;
@@ -299,8 +353,8 @@
     }
     .test-author strong { font-size: .9rem; display: block; }
     .test-author span { font-size: .78rem; color: var(--text-muted); }
-
-    /* ── CTA BAND ── */
+ 
+    /* CTA BAND */
     .cta-band {
       background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-mid) 100%);
       border-top: 1px solid rgba(212,168,67,.15);
@@ -313,34 +367,34 @@
       margin-bottom: 1rem;
     }
     .cta-band p { color: var(--text-muted); max-width: 500px; margin: 0 auto 2.4rem; font-weight: 300; line-height: 1.75; }
-
-    /* ── FOOTER ── */
+ 
+    /* FOOTER */
     footer {
       background: #060f1c;
       padding: 3.5rem 5% 2rem;
       border-top: 1px solid rgba(212,168,67,.08);
     }
-
+ 
     .footer-grid {
       display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
       gap: 2.5rem; margin-bottom: 3rem;
     }
-
+ 
     .footer-brand .logo { font-size: 1.1rem; margin-bottom: .8rem; }
     .footer-brand p { color: var(--text-muted); font-size: .85rem; line-height: 1.75; font-weight: 300; max-width: 240px; }
-
+ 
     .footer-col h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .16em; color: var(--gold); margin-bottom: 1.1rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
     .footer-col ul a { color: var(--text-muted); font-size: .85rem; text-decoration: none; transition: color .2s; }
     .footer-col ul a:hover { color: var(--white); }
-
+ 
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,.06);
       padding-top: 1.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
       font-size: .78rem; color: var(--text-muted);
     }
-
-    /* ── RESPONSIVE ── */
+ 
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       #why { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -353,7 +407,7 @@
   </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <div class="logo">
@@ -361,107 +415,161 @@
     <span>The Toppers' Way</span>
   </div>
   <ul class="nav-links">
-    <li><a href="#courses">Courses</a></li>
+    <li><a href="#exams">SSC Exams</a></li>
+    <li><a href="#faculty">Our Teacher</a></li>
     <li><a href="#why">Why Us</a></li>
-    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#testimonials">Toppers</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
- <a href="https://wa.me/919135719054" target="_blank" class="nav-cta">Enroll Now</a> <a href="typing-test.html" target="_blank" class="nav-cta" style="background:#1A3258;color:#D4A843;margin-left:.5rem;">🖥️ DEST Practice</a> <a href="ssc-cgl-mock.html" target="_blank" class="nav-cta" style="background:#122240;color:#D4A843;margin-left:.5rem;">📝 CGL Mock Test</a>
+  <div class="nav-buttons">
+    <a href="https://wa.me/919135719054" target="_blank" class="nav-cta">Enroll Now</a>
+    <a href="typing-test.html" target="_blank" class="nav-cta" style="background:#1A3258;color:#D4A843;">🖥️ DEST</a>
+    <a href="ssc-cgl-mock.html" target="_blank" class="nav-cta" style="background:#122240;color:#D4A843;">📝 Mock Test</a>
+  </div>
 </nav>
-
+ 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div style="position:relative; z-index:1;">
-    <span class="badge">✦ Excellence in Education ✦</span>
-    <h1>Learn Smarter.<br/>Rank <em>Higher</em>.</h1>
-    <p>Vampristra equips ambitious students with the strategies, mentorship, and resources that turn effort into top-rank results.</p>
+    <span class="badge">✦ India's Premier SSC Coaching Platform ✦</span>
+    <h1>Crack SSC.<br/>With <em>Expert</em> Teachers.</h1>
+    <p>Live classes, mock tests and study material for SSC CGL, CHSL, CPO, MTS and GD — all taught personally by experienced SSC educators.</p>
     <div class="hero-actions">
-      <a href="#courses" class="btn-primary">Explore Courses</a>
-      <a href="#why" class="btn-outline">Why Vampristra?</a>
+      <a href="#exams" class="btn-primary">Explore SSC Exams</a>
+      <a href="#faculty" class="btn-outline">Meet Your Teacher</a>
+      <a href="ssc-cgl-mock.html" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#1A3258,#122240);border:2px solid #D4A843;color:#D4A843;">📝 CGL Mock Test</a>
+      <a href="typing-test.html" target="_blank" class="btn-outline">🖥️ DEST Practice</a>
     </div>
   </div>
 </section>
-
+ 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat-item"><strong>12,000+</strong><span>Students Enrolled</span></div>
-  <div class="stat-item"><strong>95%</strong><span>Top-Rank Rate</span></div>
-  <div class="stat-item"><strong>80+</strong><span>Expert Educators</span></div>
-  <div class="stat-item"><strong>8 yrs</strong><span>Of Excellence</span></div>
+  <div class="stat-item"><strong>15,000+</strong><span>Students Selected</span></div>
+  <div class="stat-item"><strong>5</strong><span>SSC Exams Covered</span></div>
+  <div class="stat-item"><strong>30+</strong><span>Mock Tests Available</span></div>
+  <div class="stat-item"><strong>500+</strong><span>Study Materials</span></div>
 </div>
-
-<!-- COURSES -->
-<section id="courses">
+ 
+<!-- SSC EXAMS -->
+<section id="exams">
   <div class="course-header">
-    <span class="section-label">What We Offer</span>
-    <h2 class="section-title">Programmes Designed to Win</h2>
-    <p class="section-sub">Every course is crafted by academic experts and aligned with the latest exam patterns to give you the competitive edge.</p>
+    <span class="section-label">SSC Exams We Cover</span>
+    <h2 class="section-title">Every SSC Exam. One Platform.</h2>
+    <p class="section-sub">Personal coaching by expert SSC educators for every major Staff Selection Commission examination.</p>
   </div>
   <div class="courses-grid">
     <div class="course-card">
-      <div class="course-icon">📐</div>
-      <h3>Mathematics & Science</h3>
-      <p>From algebra to advanced calculus and physics — build rock-solid fundamentals with problem-solving techniques that save time under pressure.</p>
-      <span class="course-tag">Classes 6 – 12</span>
-    </div>
-    <div class="course-card">
-      <div class="course-icon">🧬</div>
-      <h3>Biology & Chemistry</h3>
-      <p>In-depth coverage of NCERT concepts, diagrams, and competitive exam shortcuts trusted by medical aspirants across the country.</p>
-      <span class="course-tag">NEET Focused</span>
-    </div>
-    <div class="course-card">
-      <div class="course-icon">💡</div>
-      <h3>JEE / Engineering Prep</h3>
-      <p>A rigorous programme combining concept mastery, daily practice, and mock test analysis — the Vampristra formula for IIT success.</p>
-      <span class="course-tag">JEE Main & Advanced</span>
-    </div>
-    <div class="course-card">
-      <div class="course-icon">📚</div>
-      <h3>English & Humanities</h3>
-      <p>Grammar, literature, and essay-writing skills that sharpen communication and boost marks in board and competitive examinations.</p>
-      <span class="course-tag">All Boards</span>
-    </div>
-    <div class="course-card">
       <div class="course-icon">🏆</div>
-      <h3>Olympiad & Scholarship</h3>
-      <p>Specialised training for NSO, IMO, NTSE and other scholarship exams — because toppers always go beyond the syllabus.</p>
-      <span class="course-tag">Olympiad Track</span>
+      <h3>SSC CGL</h3>
+      <p>Complete Tier 1 and Tier 2 preparation — Reasoning, Quant, English and GA with sectional mock tests and DEST typing practice.</p>
+      <span class="course-tag">Inspector · Tax Assistant · DEO</span>
     </div>
     <div class="course-card">
-      <div class="course-icon">🖥️</div>
-      <h3>Online Live Classes</h3>
-      <p>Attend interactive live sessions, access recorded lectures, and get doubt resolution 24/7 — learning on your schedule.</p>
-      <span class="course-tag">Online & Offline</span>
+      <div class="course-icon">📋</div>
+      <h3>SSC CHSL</h3>
+      <p>Focused coaching for LDC, DEO and PA/SA posts. Speed-building techniques and full-length mock tests for quick selection.</p>
+      <span class="course-tag">LDC · DEO · PA/SA</span>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">👮</div>
+      <h3>SSC CPO</h3>
+      <p>Paper I and II coaching with Physical Efficiency Test guidance for Sub Inspector posts in Delhi Police and CAPF.</p>
+      <span class="course-tag">SI Delhi Police · CAPF</span>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">📝</div>
+      <h3>SSC MTS</h3>
+      <p>Simplified coaching for Multi Tasking Staff exam covering Reasoning, Numerical Aptitude and General Awareness from scratch.</p>
+      <span class="course-tag">Multi Tasking Staff</span>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">🛡️</div>
+      <h3>SSC GD Constable</h3>
+      <p>CBT syllabus coverage, physical test tips and mock test series for BSF, CRPF, SSB, CISF and other GD Constable posts.</p>
+      <span class="course-tag">BSF · CRPF · SSB · CISF</span>
+    </div>
+    <div class="course-card">
+      <div class="course-icon">⌨️</div>
+      <h3>DEST Typing Practice</h3>
+      <p>Real SSC DEST interface with 20 passages, live KDPH tracking, 15-minute timer and Qualified/Not Qualified verdict.</p>
+      <span class="course-tag"><a href="typing-test.html" style="color:#D4A843;text-decoration:none;">Practice Free →</a></span>
     </div>
   </div>
 </section>
-
+ 
+<!-- FEATURES -->
+<section id="features" style="background:var(--navy-mid);padding:6rem 5%;text-align:center;">
+  <span class="section-label">What You Get</span>
+  <h2 class="section-title" style="margin-bottom:.8rem;">Everything You Need to Clear SSC</h2>
+  <p class="section-sub" style="margin:0 auto 3rem;">One platform. Four pillars. Unlimited success.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="ficon">📺</span>
+      <h3>Live Online Classes</h3>
+      <p>Interactive daily classes taught personally by your teacher — ask doubts and get instant answers in real time.</p>
+    </div>
+    <div class="feature-card">
+      <span class="ficon">📄</span>
+      <h3>Study Material and Notes</h3>
+      <p>Topic-wise handwritten notes, previous year papers and shortcut formula sheets — all provided free of cost.</p>
+    </div>
+    <div class="feature-card">
+      <span class="ficon">📊</span>
+      <h3>Mock Tests and Analysis</h3>
+      <p>30 full-length CGL mock tests with sectional timing, negative marking and detailed performance scorecards.</p>
+    </div>
+    <div class="feature-card">
+      <span class="ficon">💬</span>
+      <h3>Doubt Resolution</h3>
+      <p>WhatsApp support for doubt clearing anytime — no question goes unanswered by your personal teacher.</p>
+    </div>
+  </div>
+</section>
+ 
 <!-- WHY US -->
 <section id="why">
   <div class="why-visual">
     <div class="why-visual-inner">
-      <div class="why-stat-box"><div class="num">97%</div><div class="lbl">Board Toppers</div></div>
-      <div class="why-stat-box"><div class="num">500+</div><div class="lbl">AIR Top 1000</div></div>
-      <div class="why-stat-box"><div class="num">3×</div><div class="lbl">Avg Score Boost</div></div>
+      <div class="why-stat-box"><div class="num">97%</div><div class="lbl">Selection Rate</div></div>
+      <div class="why-stat-box"><div class="num">500+</div><div class="lbl">Selections</div></div>
+      <div class="why-stat-box"><div class="num">30+</div><div class="lbl">Mock Tests</div></div>
       <div class="why-stat-box"><div class="num">24/7</div><div class="lbl">Doubt Support</div></div>
     </div>
   </div>
   <div>
     <span class="section-label">Why Choose Us</span>
     <h2 class="section-title">The Vampristra Difference</h2>
-    <p class="section-sub">We don't just teach — we transform students into confident, exam-ready achievers with a proven system.</p>
+    <p class="section-sub">SSC-specialist personal coaching that builds speed, accuracy and exam temperament — not just syllabus coverage.</p>
     <ul class="why-list">
-      <li>Experienced faculty with a decade of competitive exam coaching and 500+ IIT/NEET selections.</li>
-      <li>Personalised study plans tailored to every student's pace, strength, and target goals.</li>
-      <li>Regular mock tests, detailed performance reports, and one-on-one mentoring sessions.</li>
-      <li>Small batch sizes ensuring individual attention and an encouraging learning environment.</li>
-      <li>Comprehensive study material, notes, and video libraries included at no extra cost.</li>
+      <li>Personal coaching by SSC subject specialists with a proven track record of selections in CGL, CHSL, CPO and GD.</li>
+      <li>Live interactive classes with real-time doubt resolution — your teacher is available when you need help.</li>
+      <li>30 full-length CGL mock tests with exact 2026 pattern — sectional timing, negative marking and scorecards.</li>
+      <li>Free DEST typing test with real TCS exam interface — 20 passages, KDPH tracking, category-wise result.</li>
+      <li>Study notes, previous year question papers and topic-wise practice sets provided at no extra cost.</li>
     </ul>
   </div>
 </section>
-
+ 
+<!-- FACULTY -->
+<section id="faculty">
+  <div style="text-align:center;margin-bottom:3rem;">
+    <span class="section-label">Your Educator</span>
+    <h2 class="section-title">Meet Your Teacher</h2>
+    <p class="section-sub" style="margin:0 auto;">Personally trained, SSC-focused and committed to your selection.</p>
+  </div>
+  <div class="faculty-grid">
+    <div class="faculty-card">
+      <div class="faculty-avatar">👨‍🏫</div>
+      <h3>Sumit Sir</h3>
+      <span class="role">SSC Expert · Vampristra Founder</span>
+      <p>Specialist in Quantitative Aptitude, Reasoning and General Awareness for all SSC exams. Personally teaches every batch with a focus on shortcut techniques, exam strategy and mock test analysis to maximise your score in CGL, CHSL, CPO, MTS and GD.</p>
+      <a href="https://wa.me/919135719054" target="_blank" class="faculty-btn">💬 Talk to Sumit Sir</a>
+    </div>
+  </div>
+</section>
+ 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="test-header">
@@ -471,72 +579,72 @@
   <div class="test-grid">
     <div class="test-card">
       <div class="stars">★★★★★</div>
-      <blockquote>"Vampristra's structured approach changed everything for me. I went from average marks to cracking JEE Advanced in my first attempt. The faculty here genuinely cares about your success."</blockquote>
-      <div class="test-author">
-        <div class="avatar">A</div>
-        <div><strong>Arjun Mishra</strong><span>JEE Advanced AIR 312</span></div>
-      </div>
-    </div>
-    <div class="test-card">
-      <div class="stars">★★★★★</div>
-      <blockquote>"The biology and chemistry coaching at Vampristra is exceptional. The teachers simplify complex concepts beautifully and the mock tests are spot on for NEET preparation."</blockquote>
-      <div class="test-author">
-        <div class="avatar">P</div>
-        <div><strong>Priya Kumari</strong><span>NEET – 680/720</span></div>
-      </div>
-    </div>
-    <div class="test-card">
-      <div class="stars">★★★★★</div>
-      <blockquote>"I joined online classes and the experience was just as enriching as offline. Live doubt sessions and recorded lectures helped me manage my time and score 96% in boards."</blockquote>
+      <blockquote>"Sumit Sir explained Maths shortcuts that I never found anywhere else. I cracked SSC CGL in my very first attempt. The mock tests here are exactly like the real exam pattern."</blockquote>
       <div class="test-author">
         <div class="avatar">R</div>
-        <div><strong>Ritika Singh</strong><span>Class XII – 96.4% CBSE</span></div>
+        <div><strong>Rahul Kumar</strong><span>SSC CGL Selected — Tax Assistant</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>"The DEST typing test on this website is exactly like the real TCS interface. I practiced every day and qualified comfortably. Vampristra is the best SSC platform in Bihar."</blockquote>
+      <div class="test-author">
+        <div class="avatar">P</div>
+        <div><strong>Priya Singh</strong><span>SSC CHSL Selected — LDC</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>"30 mock tests with sectional timing gave me real exam confidence. GA and Reasoning classes by Sumit Sir are outstanding. Got selected in SSC CPO on first attempt!"</blockquote>
+      <div class="test-author">
+        <div class="avatar">A</div>
+        <div><strong>Amit Mishra</strong><span>SSC CPO Selected — SI Delhi Police</span></div>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- CTA BAND -->
 <div class="cta-band" id="contact">
-  <h2>Your Topper Journey Starts Here</h2>
-  <p>Join thousands of students who chose Vampristra and discovered what they're truly capable of.</p>
-  <a href="mailto:info@vampristra.com" class="btn-primary">Contact Us Today</a>
+  <h2>Your SSC Selection Starts Here</h2>
+  <p>Join thousands of students who trusted Vampristra and got selected in SSC CGL, CHSL, CPO, MTS and GD.</p>
+  <a href="https://wa.me/919135719054" target="_blank" class="btn-primary">💬 Enroll on WhatsApp</a>
 </div>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo">VAMPRISTRA <span>The Toppers' Way</span></div>
-      <p>Empowering students across India to achieve academic excellence through expert guidance and proven methodology.</p>
+      <p>India's SSC coaching platform — live classes, mock tests and study material for CGL, CHSL, CPO, MTS and GD from Ratanpura, Bihar.</p>
     </div>
     <div class="footer-col">
-      <h4>Courses</h4>
+      <h4>SSC Exams</h4>
       <ul>
-        <li><a href="#">Mathematics</a></li>
-        <li><a href="#">Science</a></li>
-        <li><a href="#">JEE Prep</a></li>
-        <li><a href="#">NEET Prep</a></li>
-        <li><a href="#">Olympiad</a></li>
+        <li><a href="#exams">SSC CGL</a></li>
+        <li><a href="#exams">SSC CHSL</a></li>
+        <li><a href="#exams">SSC CPO</a></li>
+        <li><a href="#exams">SSC MTS</a></li>
+        <li><a href="#exams">SSC GD</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4>Practice</h4>
       <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Faculty</a></li>
-        <li><a href="#">Results</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Careers</a></li>
+        <li><a href="ssc-cgl-mock.html">CGL Mock Tests</a></li>
+        <li><a href="typing-test.html">DEST Practice</a></li>
+        <li><a href="#exams">Previous Year Papers</a></li>
+        <li><a href="#exams">Study Notes</a></li>
+        <li><a href="#faculty">Meet the Teacher</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="mailto:info@vampristra.com">info@vampristra.com</a></li>
-        <li><a href="tel:+919135719054">+91 91357 19054</a></li> <li><a href="mailto:sumit2471997@gmail.com">sumit2471997@gmail.com</a></li>
+        <li><a href="tel:+919135719054">+91 91357 19054</a></li>
+        <li><a href="mailto:sumit2471997@gmail.com">sumit2471997@gmail.com</a></li>
         <li><a href="#">Ratanpura, Motipur, Bihar - 843111</a></li>
-        <li><a href="#">Facebook</a></li>
+        <li><a href="https://wa.me/919135719054" target="_blank">WhatsApp Us</a></li>
         <li><a href="#">Instagram</a></li>
       </ul>
     </div>
@@ -546,6 +654,6 @@
     <span>Privacy Policy · Terms of Use</span>
   </div>
 </footer>
-
+ 
 </body>
 </html>
