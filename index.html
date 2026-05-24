@@ -654,6 +654,17 @@
     <span>Privacy Policy · Terms of Use</span>
   </div>
 </footer>
+
+  <script>
+// Embed chatbot
+(function(){
+  const iframe = document.createElement('iframe');
+  iframe.src = 'chatbot.html';
+  iframe.style.cssText = 'position:fixed;bottom:0;right:0;width:420px;height:100vh;border:none;z-index:9999;pointer-events:none;';
+  iframe.id = 'vampristra-chatbot';
+  document.body.appendChild(iframe);
+})();
+</script>
  
 </body>
 </html>
